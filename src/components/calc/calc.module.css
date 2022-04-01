@@ -13,6 +13,7 @@
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: center;
+    width: 300px;
 
 
 }
@@ -31,6 +32,7 @@
     grid-area: C;
     text-align: center;
     padding-left: 30px;
+    width: 200px;
 
 }
 .rowitemproduct{

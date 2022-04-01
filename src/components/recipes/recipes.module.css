@@ -1,17 +1,17 @@
 .content{
     display: grid;
     grid-template-columns: 200px auto;
+grid-template-areas: "A A A B B B B B B B B B";
 
-    grid-gap: 1rem;
 }
 .listtitlerecipes{
-    grid-column: 1 / span 3;
+width: 300px;
     margin-top: 10px;
   grid-area: A;
     border-right: 1px solid rgb(255,98,66);
 }
 .recipe{
-    grid-column: 5 / span 7;
+
     grid-area: B;
 
 }
