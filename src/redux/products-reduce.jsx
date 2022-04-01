@@ -3,24 +3,25 @@ const SETCOLTITEMMYPRODUCT = "SETCOLTITEMMYPRODUCT";
 const SETCOUNTITEMMYPRODUCT = "SETCOUNTITEMMYPRODUCT";
 const SETWEIGHTCAKE = "SETWEIGHTCAKE";
 const STATECALCULATION = "STATECALCULATION";
+const REMOVEMUITEMPRODUCT = "REMOVEMUITEMPRODUCT";
 
 let initialStore = {
     products: [
-        {id: 1, name: "Сахар", volume: 1, edizm: "кг", colt: 111, count: 222},
+        {id: 1, name: "Сахар", volume: 1, edizm: "кг", colt: null, count: null},
         {id: 2, name: "Мука", volume: 1, edizm: "кг", colt: null, count: null},
         {id: 3, name: "Яица", volume: 10, edizm: "шт", colt: null, count: null},
-        {id: 4, name: "Сливочное масло", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 5, name: "Сыр", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 6, name: "Ванилин", volume: 1, edizm: "уп", colt: null, count: null},
-        {id: 7, name: "Какао", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 8, name: "Растительное масло", volume: 1, edizm: "л", colt: null, count: null},
-        {id: 9, name: "Рахрыхлитель", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 10, name: "Сода", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 11, name: "Корица", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 12, name: "Мускатный орех", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 13, name: "Апельсины", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 14, name: "Морковь", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 15, name: "Грецкий орех", volume: 1, edizm: "кг", colt: null, count: null}
+        {id: 4, name: "Сливочное масло", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 5, name: "Сыр", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 6, name: "Ванилин", volume: 1, edizm: "уп", colt:null, count:null},
+        {id: 7, name: "Какао", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 8, name: "Растительное масло", volume: 1, edizm: "л", colt:null, count:null},
+        {id: 9, name: "Рахрыхлитель", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 10, name: "Сода", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 11, name: "Корица", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 12, name: "Мускатный орех", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 13, name: "Апельсины", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 14, name: "Морковь", volume: 1, edizm: "кг", colt:null, count:null},
+        {id: 15, name: "Грецкий орех", volume: 1, edizm: "кг", colt:null, count:null}
     ],
     selectedProducts: [],
     weightCake: 0,
@@ -81,6 +82,15 @@ const productsReduce = (state = initialStore, action) => {
 
             }
         }
+        case REMOVEMUITEMPRODUCT:{
+
+            return {
+
+               ...state,
+                selectedProducts:state.selectedProducts.filter(f=>f.id!=action.id)
+
+            }
+        }
         case STATECALCULATION:{
             let x;
             return {
@@ -103,6 +113,12 @@ export const setItemMyProduct = (id) => {
     return {
         type: SETMUITEMPRODUCT,
         obj: id
+    }
+};
+export const removeItemMyProduct = (id) => {
+    return {
+        type: REMOVEMUITEMPRODUCT,
+        id: id
     }
 };
 export const setColtItemMyProduct = (id, colt) => {

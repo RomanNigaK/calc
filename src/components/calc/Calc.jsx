@@ -4,6 +4,7 @@ import css from "./calc.module.css"
 
 const Calc = (props) => {
 
+console.log("!!!"+props.products)
 
 
     let calculation = () => {
@@ -13,13 +14,23 @@ const Calc = (props) => {
 
     console.log(props.products);
     let addInMyListProducts = (e) => {
+       // console.log(e);
         let itemId = e.target.id;
         props.setItemMyProduct(itemId);
+
+    };
+
+    let removeInMyListProducts = (e) => {
+
+        //console.log(e);
+        let itemId = e.target.id;
+        props.removeItemMyProduct(itemId);
 
     };
     let enterDataColt = (e) => {
         let colt = e.target.value;
         let itemId = e.target.id;
+        if (colt==null){alert("f")}
         colt.length===0?props.setColtItemMyProduct(itemId, null):props.setColtItemMyProduct(itemId, colt)
         }
 
@@ -32,11 +43,11 @@ const Calc = (props) => {
 
     }
     let chekProductItem = (obj) => {
-        console.log("0")
+
         if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
             return <div className={css.rowitemproduct}>
                         <span>
-                            <span id={obj.id}>{obj.name} </span>
+                            <span  onDoubleClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
                             <span>
                                 <img src="assetc/g.png" alt="sdfd"/>
                                  <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
@@ -62,13 +73,14 @@ const Calc = (props) => {
 
     let myList = <div className={css.emptylist}>Вы еще ничего не выбрали</div>;
     if (props.products.selectedProducts.length > 0) {
+
         myList = props.products.selectedProducts.map((item) => (
             <tr>
                 <td><span>{item.name}</span></td>
                 <td><input id={item.id} onChange={enterDataColt} className={css.inputmylistproducts} type="text"
-                           placeholder="0.00" value={props.products.selectedProducts[item.id-1].colt}/>р./{item.edizm}</td>
+                           placeholder="0.00" value={item.colt}/>р./{item.edizm}</td>
                 <td><input id={item.id} onChange={enterDataCount} className={css.inputmylistproducts} type="text"
-                           placeholder="0.00" value={props.products.selectedProducts[item.id-1].count}/>{item.edizm}</td>
+                           placeholder="0.00" value={item.count}/>{item.edizm}</td>
             </tr>
         ))
     }
