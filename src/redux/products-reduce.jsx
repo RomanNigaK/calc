@@ -4,33 +4,34 @@ const SETCOUNTITEMMYPRODUCT = "SETCOUNTITEMMYPRODUCT";
 const SETWEIGHTCAKE = "SETWEIGHTCAKE";
 const STATECALCULATION = "STATECALCULATION";
 const REMOVEMUITEMPRODUCT = "REMOVEMUITEMPRODUCT";
+const SETNULLFIND = "SETNULLFIND";
+const SETSEACRCH = "SETSEACRCH";
 
 let initialStore = {
     products: [
-        {id: 1, name: "Сахар", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 2, name: "Мука", volume: 1, edizm: "кг", colt: null, count: null},
-        {id: 3, name: "Яица", volume: 10, edizm: "шт", colt: null, count: null},
-        {id: 4, name: "Сливочное масло", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 5, name: "Сыр", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 6, name: "Ванилин", volume: 1, edizm: "уп", colt:null, count:null},
-        {id: 7, name: "Какао", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 8, name: "Растительное масло", volume: 1, edizm: "л", colt:null, count:null},
-        {id: 9, name: "Рахрыхлитель", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 10, name: "Сода", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 11, name: "Корица", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 12, name: "Мускатный орех", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 13, name: "Апельсины", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 14, name: "Морковь", volume: 1, edizm: "кг", colt:null, count:null},
-        {id: 15, name: "Грецкий орех", volume: 1, edizm: "кг", colt:null, count:null}
+        {id: 1, name: "Сахар", volume: 1, edizm: "кг", colt: undefined, count: null, general:true},
+        {id: 2, name: "Мука", volume: 1, edizm: "кг", colt: null, count: null, general:true},
+        {id: 3, name: "Яица", volume: 10, edizm: "шт", colt: null, count: null, general:true},
+        {id: 4, name: "Сливочное масло", volume: 1, edizm: "кг", colt: null, count: null, general:true},
+        {id: 5, name: "Сыр", volume: 1, edizm: "кг", colt: null, count: null, general:true},
+        {id: 6, name: "Ванилин", volume: 1, edizm: "уп", colt: null, count: null, general:true},
+        {id: 7, name: "Какао", volume: 1, edizm: "кг", colt: null, count: null, general:true},
+        {id: 8, name: "Растительное масло", volume: 1, edizm: "л", colt: null, count: null, general:false},
+        {id: 9, name: "Рахрыхлитель", volume: 1, edizm: "кг", colt: null, count: null, general:false},
+        {id: 10, name: "Сода", volume: 1, edizm: "кг", colt: null, count: null, general:false},
+        {id: 11, name: "Корица", volume: 1, edizm: "кг", colt: null, count: null, general:false},
+        {id: 12, name: "Мускатный орех", volume: 1, edizm: "кг", colt: null, count: null, general:false},
+        {id: 13, name: "Апельсины", volume: 1, edizm: "кг", colt: null, count: null, general:false},
+        {id: 14, name: "Морковь", volume: 1, edizm: "кг", colt: null, count: null, general:false},
+        {id: 15, name: "Грецкий орех", volume: 1, edizm: "кг", colt: null, count: null, general:false}
     ],
     selectedProducts: [],
     weightCake: 0,
-    costPrice:0,
-    expenses:0,
-    validSymbols:[".","0","1","2","3","4","5","6","7","8","9"]
-
-
-
+    costPrice: 0,
+    expenses: 0,
+    strSearch: "",
+    findItems:[],
+    showSearch:false
 
 
 };
@@ -50,14 +51,13 @@ const productsReduce = (state = initialStore, action) => {
         case SETCOLTITEMMYPRODUCT: {
 
 
-
             return {
                 ...state,
 
                 selectedProducts: state.selectedProducts.map((product) => {
                     if (product.id == action.id) {
 
-                       return {...product, colt: action.colt}
+                        return {...product, colt: action.colt}
                     }
                     return product
                 })
@@ -75,29 +75,54 @@ const productsReduce = (state = initialStore, action) => {
                 })
             }
         }
-        case SETWEIGHTCAKE:{
+        case SETWEIGHTCAKE: {
             return {
                 ...state,
-                weightCake:action.weight
+                weightCake: action.weight
 
             }
         }
-        case REMOVEMUITEMPRODUCT:{
+        case REMOVEMUITEMPRODUCT: {
 
             return {
 
-               ...state,
-                selectedProducts:state.selectedProducts.filter(f=>f.id!=action.id)
+                ...state,
+                selectedProducts: state.selectedProducts.filter(f => f.id != action.id)
 
             }
         }
-        case STATECALCULATION:{
+        case STATECALCULATION: {
             let x;
             return {
                 ...state,
-                costPrice: state.selectedProducts.map(item=>item.colt*item.count).map(i=>x+=i, x=0).reverse()[0]/state.weightCake,
-                expenses: state.selectedProducts.map(item=>item.colt*item.count).map(i=>x+=i, x=0).reverse()[0]
+                costPrice: state.selectedProducts.map(item => item.colt * item.count).map(i => x += i, x = 0).reverse()[0] / state.weightCake,
+                expenses: state.selectedProducts.map(item => item.colt * item.count).map(i => x += i, x = 0).reverse()[0]
 
+
+            }
+        }
+        case SETNULLFIND: {
+            return {
+                ...state,
+                strSearch: ""
+            }
+        }
+        case SETSEACRCH: {
+            if (action.lenghtStr > 1) {
+                return {
+                    ...state,
+                    strSearch: action.text,
+                    showSearch:true,
+                    findItems: state.products.filter(item=>item.name.toUpperCase().indexOf(action.text.toUpperCase())!==-1)
+                 }
+            } else {
+                return{
+
+                    ...state,
+                    findItems:[],
+                    strSearch: action.text
+
+                }
 
             }
         }
@@ -147,7 +172,18 @@ export const stateCalculation = () => {
 
     }
 };
-
+export const setNullFind = () => {
+    return {
+        type: SETNULLFIND
+    }
+};
+export const setSearch = (text, lenghtStr) => {
+    return {
+        type: SETSEACRCH,
+        text: text,
+        lenghtStr: lenghtStr
+    }
+};
 
 
 export default productsReduce;

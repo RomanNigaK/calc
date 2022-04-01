@@ -5,7 +5,7 @@ import {
     removeItemMyProduct,
     setColtItemMyProduct,
     setCountItemMyProduct,
-    setItemMyProduct,
+    setItemMyProduct, setNullFind, setSearch,
     setWeightCake, stateCalculation
 } from "../../redux/products-reduce";
 
@@ -19,5 +19,5 @@ let mapStateToProps=(state)=>{
 
 
 
-const CalcContainer = connect(mapStateToProps,{stateCalculation,removeItemMyProduct,setWeightCake,setItemMyProduct,setColtItemMyProduct,setCountItemMyProduct})(Calc);
+const CalcContainer = connect(mapStateToProps,{setSearch,setNullFind,stateCalculation,removeItemMyProduct,setWeightCake,setItemMyProduct,setColtItemMyProduct,setCountItemMyProduct})(Calc);
 export default CalcContainer;

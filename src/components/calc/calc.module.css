@@ -105,3 +105,42 @@
     margin-top: 30px;
     color: red;
 }
+
+.inputfind input{
+    border: none;
+    background: none;
+    margin-left: 30px;
+    font-size: 12px;
+    padding: 5px;
+}
+.inputfind{
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+.viewFastSearch{
+
+    display: none;
+}
+.viewFastSearchShow{
+   display: block;
+    position: absolute;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;
+}
+
+.preloaderdiv{
+     width: 100%;
+     text-align: center;
+    display: none;
+ }
+.preloaderdishow{
+    width: 100%;
+    text-align: center;
+    display: block;
+}

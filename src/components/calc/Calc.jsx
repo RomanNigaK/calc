@@ -1,28 +1,22 @@
 import React from "react";
 import css from "./calc.module.css"
+import Find from "./Find";
 
 
 const Calc = (props) => {
 
-console.log("!!!"+props.products)
-
-
+console.log(props)
     let calculation = () => {
-
         props.stateCalculation();
     };
 
-    console.log(props.products);
     let addInMyListProducts = (e) => {
-       // console.log(e);
         let itemId = e.target.id;
         props.setItemMyProduct(itemId);
 
     };
 
     let removeInMyListProducts = (e) => {
-
-        //console.log(e);
         let itemId = e.target.id;
         props.removeItemMyProduct(itemId);
 
@@ -30,45 +24,76 @@ console.log("!!!"+props.products)
     let enterDataColt = (e) => {
         let colt = e.target.value;
         let itemId = e.target.id;
-        if (colt==null){alert("f")}
-        colt.length===0?props.setColtItemMyProduct(itemId, null):props.setColtItemMyProduct(itemId, colt)
-        }
-
+        colt.length === 0 ? props.setColtItemMyProduct(itemId, null) : props.setColtItemMyProduct(itemId, colt)
+    };
     let enterDataCount = (e) => {
-
         let itemId = e.target.id;
         let count = e.target.value;
-        count.length===0?props.setCountItemMyProduct(itemId,null):props.setCountItemMyProduct(itemId,count)
-        //props.setCountItemMyProduct(itemId, count);
+        count.length === 0 ? props.setCountItemMyProduct(itemId, null) : props.setCountItemMyProduct(itemId, count)
+    };
 
-    }
-    let chekProductItem = (obj) => {
 
-        if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
-            return <div className={css.rowitemproduct}>
+
+
+
+
+    let chekProductItem = (obj,arealSearch) => {
+
+        if (arealSearch=="general"){
+            if (obj.general){
+                if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
+                    return <div className={css.rowitemproduct}>
                         <span>
-                            <span  onDoubleClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
+                            <span onDoubleClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
                             <span>
                                 <img src="assetc/g.png" alt="sdfd"/>
                                  <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
                             </span>
                         </span>
-            </div>
+                    </div>
 
-        } else {
-            return <div className={css.rowitemproduct}>
-                <span onDoubleClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
-                <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
-            </div>
+                } else {
+                    return <div className={css.rowitemproduct}>
+                        <span onDoubleClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
+                        <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
+                    </div>
+                }
+            }
         }
+
+        if (arealSearch=="all"){
+            if (obj){
+                if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
+                    return <div className={css.rowitemproduct}>
+                        <span>
+                            <span onDoubleClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
+                            <span>
+                                <img src="assetc/g.png" alt="sdfd"/>
+                                 <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
+                            </span>
+                        </span>
+                    </div>
+
+                } else {
+                    return <div className={css.rowitemproduct}>
+                        <span onDoubleClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
+                        <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
+                    </div>
+                }
+            }
+        }
+
+
+
     };
     let enterWeightCake = (e) => {
         let weight = e.target.value;
         props.setWeightCake(weight);
-    }
+    };
+
     let list = props.products.products.map(
         (item) => (<div>
-            {chekProductItem(item)}
+            {chekProductItem(item,"general")}
         </div>));
 
     let myList = <div className={css.emptylist}>Вы еще ничего не выбрали</div>;
@@ -77,7 +102,9 @@ console.log("!!!"+props.products)
         myList = props.products.selectedProducts.map((item) => (
             <tr>
                 <td><span>{item.name}</span></td>
-                <td><input id={item.id} onChange={enterDataColt} className={css.inputmylistproducts} type="text"
+
+                <td>
+                    <input id={item.id} onChange={enterDataColt} className={css.inputmylistproducts}
                            placeholder="0.00" value={item.colt}/>р./{item.edizm}</td>
                 <td><input id={item.id} onChange={enterDataCount} className={css.inputmylistproducts} type="text"
                            placeholder="0.00" value={item.count}/>{item.edizm}</td>
@@ -88,7 +115,16 @@ console.log("!!!"+props.products)
     return (
         <div className={css.content}>
             <div className={css.listproducts} style={{backgroundImage: "url(/assetc/strelkafon.png)"}}>
-                <h2>Список продуктов</h2>
+                <Find search={props.products.findItems}
+                      addInMyListProducts={addInMyListProducts}
+                      value ={props.products.strSearch}
+                      setSearch={props.setSearch}
+                      setNullFind={props.setNullFind}
+                      chekProductItem={chekProductItem}
+                      showSearch={props.products.showSearch}
+                      products={props.products}/>
+
+                <h2>Основные продукты</h2>
                 {list}
             </div>
             <div className={css.listselectedproducts} style={{backgroundImage: "url(/assetc/strelkafon.png)"}}>
