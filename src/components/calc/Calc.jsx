@@ -22,14 +22,31 @@ console.log(props)
 
     };
     let enterDataColt = (e) => {
-        let colt = e.target.value;
         let itemId = e.target.id;
-        colt.length === 0 ? props.setColtItemMyProduct(itemId, null) : props.setColtItemMyProduct(itemId, colt)
+        let colt = e.target.value;
+        let floatValues =  "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
+        if (colt.length===0){
+            props.setColtItemMyProduct(itemId, "")
+        }else{
+            if (colt.match(floatValues) && !isNaN(colt)) {
+                props.setColtItemMyProduct(itemId, colt)
+            }
+        }
+
+
+
     };
     let enterDataCount = (e) => {
         let itemId = e.target.id;
         let count = e.target.value;
-        count.length === 0 ? props.setCountItemMyProduct(itemId, null) : props.setCountItemMyProduct(itemId, count)
+        let floatValues =  "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
+        if (count.length===0){
+            props.setCountItemMyProduct(itemId, "")
+        }else{
+            if (count.match(floatValues) && !isNaN(count)) {
+                props.setCountItemMyProduct(itemId, count)
+            }
+        }
     };
 
 
@@ -105,9 +122,9 @@ console.log(props)
 
                 <td>
                     <input id={item.id} onChange={enterDataColt} className={css.inputmylistproducts}
-                           placeholder="0.00" value={item.colt}/>р./{item.edizm}</td>
+                           placeholder="0.00" value={item.colt} autocomplete="off"/>р./{item.edizm}</td>
                 <td><input id={item.id} onChange={enterDataCount} className={css.inputmylistproducts} type="text"
-                           placeholder="0.00" value={item.count}/>{item.edizm}</td>
+                           placeholder="0.00" value={item.count} autocomplete="off"/>{item.edizm}</td>
             </tr>
         ))
     }
@@ -157,7 +174,7 @@ console.log(props)
                 {/* <img src="assetc/preloader.gif" alt=""/>*/}
                 <div className={css.enddivresult}>
                     {props.products.selectedProducts.length > 0 ?
-                        props.products.selectedProducts.filter(item => (item.colt == null || item.count == null)) == 0 ?
+                        props.products.selectedProducts.filter(item => (item.colt == "" || item.count == "")) == 0 ?
                             props.products.weightCake > 0 ?
                                 props.products.costPrice > 0 ? <div>
                                         <span>Себестоимость за 1 кг - </span>
