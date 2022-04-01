@@ -24,7 +24,7 @@ console.log(props)
     let enterDataColt = (e) => {
         let itemId = e.target.id;
         let colt = e.target.value;
-        let floatValues =  "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
+        let floatValues =  "^[+-]?([0-9]+([.,.][0-9]*)?|[.,.][0-9]+)$";
         if (colt.length===0){
             props.setColtItemMyProduct(itemId, "")
         }else{
