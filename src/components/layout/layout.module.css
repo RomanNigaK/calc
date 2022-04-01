@@ -1,0 +1,64 @@
+a{
+    color: rgb(255,98,66);
+}
+.container{
+
+    display: grid;
+    grid-gap: 5px;
+    padding: 10px;
+    /*grid-template-columns: 100px 50px auto;*/
+    grid-template-areas:
+            "A A A A  A A A A  A A A A"
+            "M0 M0 M0 M0 M0 M0 M1 M1 M2 M2 M3 M3"
+            "C C C C  C C C C  C C C C";
+}
+.header{
+    grid-area: A;
+    border-bottom: 3px solid rgb(255,98,66);
+
+    align-content: center;
+
+}
+
+.linkhome{
+    grid-area: M1;
+color: rgb(255,98,66);
+    text-align: center;
+}
+.linkcalc{
+    grid-area: M2;
+
+    text-align: center;
+
+}
+.linkrecipes{
+    grid-area: M3;
+
+    text-align: center;
+
+}
+.content{
+    grid-area: C;
+border-top: 2px solid rgb(255,98,66);
+    text-align: center;
+}
+
+.imglogo{
+    float: left;
+    width: 100px;
+}
+.headername{
+
+    color: rgb(255,98,66);
+    font-size: 18pt;
+    padding-top: 50px;
+    padding-left: 20px;
+}
+a.activelink{
+
+    text-decoration-line: underline;
+}
+a.notactivelink{
+
+    text-decoration-line: none;
+}
