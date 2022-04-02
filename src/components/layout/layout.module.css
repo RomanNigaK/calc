@@ -14,7 +14,7 @@ a{
 }
 .header{
     grid-area: A;
-    border-bottom: 3px solid rgb(255,98,66);
+   
 
     align-content: center;
 

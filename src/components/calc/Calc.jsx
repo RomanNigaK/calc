@@ -152,11 +152,16 @@ console.log(props)
                         <tr>
                             <th>Продукт</th>
                             <th>Цена</th>
-                            <th>Потрачено</th>
+                            <th>Количество</th>
                         </tr>
                         </thead>
                         <tbody>
                         {myList}
+                        <tr>
+                            <th colSpan="3">ИТОГО ЗАТРАТЫ: 0 руб.</th>
+
+
+                        </tr>
                         </tbody>
                     </table>
                 </div>
