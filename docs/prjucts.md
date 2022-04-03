@@ -1,8 +1,9 @@
 ### Products
 
--    get:/users - все данные
+#### get
+-   users - все данные
         http://fortestreactnode-js.ru/products
--    get:/users/:id - конкретный продукт
+-   users/:id - конкретный продукт
 http://fortestreactnode-js.ru/products/2
 
 Получаемые значения:
@@ -14,4 +15,10 @@ http://fortestreactnode-js.ru/products/2
 - colt - цена за еденицу volume
 - count - количество используемого продукта
 - general - (1-находиться в основном списке/0-не находиться)
+ 
+ #### post:
+ ##### Request
+ 
+ 
+ ##### Response
  
