@@ -18,7 +18,11 @@ http://fortestreactnode-js.ru/products/2
  
  #### post:
  ##### Request
+ id - номер элемента 
+ colt - новая стоимость
  
  
  ##### Response
+ 1 - запись обновледена
+ 0 - запись не обновлена
  

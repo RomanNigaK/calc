@@ -6,7 +6,11 @@ import {productsAPI} from "../../api/api";
 
 const Calc = (props) => {
 
+    //console.log(productsAPI.updateProductItem(100,22));
+
+
     useEffect(() => {
+
         props.getProducts();
 
     }, []);
