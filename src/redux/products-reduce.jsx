@@ -6,25 +6,10 @@ const STATECALCULATION = "STATECALCULATION";
 const REMOVEMUITEMPRODUCT = "REMOVEMUITEMPRODUCT";
 const SETNULLFIND = "SETNULLFIND";
 const SETSEACRCH = "SETSEACRCH";
+const SETSTATEPRODUCTS = "SETSTATEPRODUCTS";
 
 let initialStore = {
-    products: [
-        {id: 1, name: "Сахар", volume: 1, edizm: "кг", colt: "", count: "", general:true},
-        {id: 2, name: "Мука", volume: 1, edizm: "кг", colt: "", count: "", general:true},
-        {id: 3, name: "Яица", volume: 10, edizm: "шт", colt: "", count: "", general:true},
-        {id: 4, name: "Сливочное масло", volume: 1, edizm: "кг", colt: "", count: "", general:true},
-        {id: 5, name: "Сыр", volume: 1, edizm: "кг", colt: "", count: "", general:true},
-        {id: 6, name: "Ванилин", volume: 1, edizm: "уп", colt: "", count: "", general:true},
-        {id: 7, name: "Какао", volume: 1, edizm: "кг", colt: "", count: "", general:true},
-        {id: 8, name: "Растительное масло", volume: 1, edizm: "л", colt: "", count: "", general:false},
-        {id: 9, name: "Рахрыхлитель", volume: 1, edizm: "кг", colt: "", count: "", general:false},
-        {id: 10, name: "Сода", volume: 1, edizm: "кг", colt: "", count: "", general:false},
-        {id: 11, name: "Корица", volume: 1, edizm: "кг", colt: "", count: "", general:false},
-        {id: 12, name: "Мускатный орех", volume: 1, edizm: "кг", colt: "", count: "", general:false},
-        {id: 13, name: "Апельсины", volume: 1, edizm: "кг", colt: "", count: "", general:false},
-        {id: 14, name: "Морковь", volume: 1, edizm: "кг", colt: "", count: "", general:false},
-        {id: 15, name: "Грецкий орех", volume: 1, edizm: "кг", colt: "", count: "", general:false}
-    ],
+    products: [],
     selectedProducts: [],
     weightCake: 0,
     costPrice: 0,
@@ -126,8 +111,17 @@ const productsReduce = (state = initialStore, action) => {
 
             }
         }
+        case SETSTATEPRODUCTS:{
+
+            return {
+                ...state,
+                products:action.data
+
+            }
+        }
         default:
             return state;
+
 
 
     }
@@ -185,5 +179,11 @@ export const setSearch = (text, lenghtStr) => {
     }
 };
 
+export const setStateProducts=(data)=>{
+    return{
+        type:SETSTATEPRODUCTS,
+        data:data
+    }
+}
 
 export default productsReduce;

@@ -6,7 +6,7 @@ a{
     display: grid;
     grid-gap: 5px;
     padding: 10px;
-    /*grid-template-columns: 100px 50px auto;*/
+
     grid-template-areas:
             "A A A A  A A A A  A A A A"
             "M0 M0 M0 M0 M0 M0 M1 M1 M2 M2 M3 M3"
@@ -24,16 +24,17 @@ a{
     grid-area: M1;
 color: rgb(255,98,66);
     text-align: center;
+    width: 150px;
 }
 .linkcalc{
     grid-area: M2;
-
+    width: 150px;
     text-align: center;
 
 }
 .linkrecipes{
     grid-area: M3;
-
+    width: 150px;
     text-align: center;
 
 }

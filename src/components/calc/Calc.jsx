@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import css from "./calc.module.css"
 import Find from "./Find";
+import {productsAPI} from "../../api/api";
 
 
 const Calc = (props) => {
 
-console.log(props)
+    useEffect(() => {
+        productsAPI.setProducts().then(data => {
+            props.setStateProducts(data);
+        });
+
+    }, []);
+
+
+    console.log(props)
     let calculation = () => {
         props.stateCalculation();
     };
@@ -24,25 +33,24 @@ console.log(props)
     let enterDataColt = (e) => {
         let itemId = e.target.id;
         let colt = e.target.value;
-        let floatValues =  "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
-        if (colt.length===0){
+        let floatValues = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
+        if (colt.length === 0) {
             props.setColtItemMyProduct(itemId, "")
-        }else{
+        } else {
             if (colt.match(floatValues) && !isNaN(colt)) {
                 props.setColtItemMyProduct(itemId, colt)
             }
         }
 
 
-
     };
     let enterDataCount = (e) => {
         let itemId = e.target.id;
         let count = e.target.value;
-        let floatValues =  "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
-        if (count.length===0){
+        let floatValues = "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$";
+        if (count.length === 0) {
             props.setCountItemMyProduct(itemId, "")
-        }else{
+        } else {
             if (count.match(floatValues) && !isNaN(count)) {
                 props.setCountItemMyProduct(itemId, count)
             }
@@ -50,14 +58,10 @@ console.log(props)
     };
 
 
+    let chekProductItem = (obj, arealSearch) => {
 
-
-
-
-    let chekProductItem = (obj,arealSearch) => {
-
-        if (arealSearch=="general"){
-            if (obj.general){
+        if (arealSearch == "general") {
+            if (obj.general) {
                 if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
                     return <div className={css.rowitemproduct}>
                         <span>
@@ -78,8 +82,8 @@ console.log(props)
             }
         }
 
-        if (arealSearch=="all"){
-            if (obj){
+        if (arealSearch == "all") {
+            if (obj) {
                 if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
                     return <div className={css.rowitemproduct}>
                         <span>
@@ -99,7 +103,6 @@ console.log(props)
                 }
             }
         }
-
 
 
     };
@@ -110,7 +113,7 @@ console.log(props)
 
     let list = props.products.products.map(
         (item) => (<div>
-            {chekProductItem(item,"general")}
+            {chekProductItem(item, "general")}
         </div>));
 
     let myList = <div className={css.emptylist}>Вы еще ничего не выбрали</div>;
@@ -134,7 +137,7 @@ console.log(props)
             <div className={css.listproducts} style={{backgroundImage: "url(/assetc/strelkafon.png)"}}>
                 <Find search={props.products.findItems}
                       addInMyListProducts={addInMyListProducts}
-                      value ={props.products.strSearch}
+                      value={props.products.strSearch}
                       setSearch={props.setSearch}
                       setNullFind={props.setNullFind}
                       chekProductItem={chekProductItem}

@@ -1,6 +1,7 @@
 ### Products
 
--    get:/users
+-    get:/users - все данные
+-    get:/users/:id - конкретный продукт
 
 Получаемые значения:
 
