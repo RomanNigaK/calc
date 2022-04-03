@@ -1,3 +1,5 @@
+import {productsAPI} from "../api/api";
+
 const SETMUITEMPRODUCT = "SETMUITEMPRODUCT";
 const SETCOLTITEMMYPRODUCT = "SETCOLTITEMMYPRODUCT";
 const SETCOUNTITEMMYPRODUCT = "SETCOUNTITEMMYPRODUCT";
@@ -7,6 +9,8 @@ const REMOVEMUITEMPRODUCT = "REMOVEMUITEMPRODUCT";
 const SETNULLFIND = "SETNULLFIND";
 const SETSEACRCH = "SETSEACRCH";
 const SETSTATEPRODUCTS = "SETSTATEPRODUCTS";
+const ONLOADFALSE = "ONLOADFALSE";
+const ONLOAD = "ONLOAD";
 
 let initialStore = {
     products: [],
@@ -15,8 +19,9 @@ let initialStore = {
     costPrice: 0,
     expenses: 0,
     strSearch: "",
-    findItems:[],
-    showSearch:false
+    findItems: [],
+    showSearch: false,
+    onload: false
 
 
 };
@@ -97,31 +102,39 @@ const productsReduce = (state = initialStore, action) => {
                 return {
                     ...state,
                     strSearch: action.text,
-                    showSearch:true,
-                    findItems: state.products.filter(item=>item.name.toUpperCase().indexOf(action.text.toUpperCase())!==-1)
-                 }
+                    showSearch: true,
+                    findItems: state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1)
+                }
             } else {
-                return{
+                return {
 
                     ...state,
-                    findItems:[],
+                    findItems: [],
                     strSearch: action.text
 
                 }
 
             }
         }
-        case SETSTATEPRODUCTS:{
+        case SETSTATEPRODUCTS: {
 
             return {
                 ...state,
-                products:action.data
+                products: action.data
 
             }
         }
+        case ONLOAD: {
+console.log("load")
+            return {
+                ...state,
+                onload: action.onload
+
+            }
+        }
+
         default:
             return state;
-
 
 
     }
@@ -179,11 +192,30 @@ export const setSearch = (text, lenghtStr) => {
     }
 };
 
-export const setStateProducts=(data)=>{
-    return{
-        type:SETSTATEPRODUCTS,
-        data:data
+export const setStateProducts = (data) => {
+    return {
+        type: SETSTATEPRODUCTS,
+        data: data
     }
 }
+const onLoad = (onload) => {
+    return {
+        type: ONLOAD,
+        onload:onload
+    }
+}
+
+
+export const getProducts = () => {
+    return (dispatch) => {
+        dispatch(onLoad(true));
+        productsAPI.setProducts().then(data => {
+            dispatch(setStateProducts(data));
+            dispatch(onLoad(false))
+        });
+
+
+    }
+};
 
 export default productsReduce;

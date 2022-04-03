@@ -7,9 +7,7 @@ import {productsAPI} from "../../api/api";
 const Calc = (props) => {
 
     useEffect(() => {
-        productsAPI.setProducts().then(data => {
-            props.setStateProducts(data);
-        });
+        props.getProducts();
 
     }, []);
 
@@ -145,6 +143,8 @@ const Calc = (props) => {
                       products={props.products}/>
 
                 <h2>Основные продукты</h2>
+
+                {props.products.onload ? <img src="/assetc/preloader.png" alt=""/>:null}
                 {list}
             </div>
             <div className={css.listselectedproducts} style={{backgroundImage: "url(/assetc/strelkafon.png)"}}>

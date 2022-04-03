@@ -1,7 +1,9 @@
 ### Products
 
 -    get:/users - все данные
+        http://fortestreactnode-js.ru/products
 -    get:/users/:id - конкретный продукт
+http://fortestreactnode-js.ru/products/2
 
 Получаемые значения:
 
