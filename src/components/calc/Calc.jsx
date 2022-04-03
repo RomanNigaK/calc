@@ -6,9 +6,6 @@ import {productsAPI} from "../../api/api";
 
 const Calc = (props) => {
 
-    //console.log(productsAPI.updateProductItem(100,22));
-
-
     useEffect(() => {
 
         props.getProducts();
@@ -67,7 +64,7 @@ const Calc = (props) => {
                 if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
                     return <div className={css.rowitemproduct}>
                         <span>
-                            <span onDoubleClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
+                            <span onClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
                             <span>
                                 <img src="assetc/g.png" alt="sdfd"/>
                                  <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
@@ -77,7 +74,7 @@ const Calc = (props) => {
 
                 } else {
                     return <div className={css.rowitemproduct}>
-                        <span onDoubleClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
+                        <span onClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
                         <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
                     </div>
                 }
@@ -89,7 +86,7 @@ const Calc = (props) => {
                 if (props.products.selectedProducts.find(item => item.id == obj.id) && true) {
                     return <div className={css.rowitemproduct}>
                         <span>
-                            <span onDoubleClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
+                            <span onClick={removeInMyListProducts} id={obj.id}>{obj.name} </span>
                             <span>
                                 <img src="assetc/g.png" alt="sdfd"/>
                                  <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
@@ -99,7 +96,7 @@ const Calc = (props) => {
 
                 } else {
                     return <div className={css.rowitemproduct}>
-                        <span onDoubleClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
+                        <span onClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
                         <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
                     </div>
                 }
@@ -144,7 +141,11 @@ const Calc = (props) => {
                       setNullFind={props.setNullFind}
                       chekProductItem={chekProductItem}
                       showSearch={props.products.showSearch}
-                      products={props.products}/>
+                      products={props.products}
+                      showHelp={props.showHelp}
+                      closeHelp={props.closeHelp}/>
+
+                   <div className={css.textHelp}>{props.products.currentHelp}</div>
 
                 <h2>Основные продукты</h2>
 

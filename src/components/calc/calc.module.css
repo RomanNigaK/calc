@@ -148,3 +148,17 @@
     text-align: center;
     display: block;
 }
+.textHelp{
+    text-align: center;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    background-color: white;
+    margin-right: 10px;
+    margin-left: 10px;
+    display: block;
+}
+.textHelpHide{
+    display: none;
+}

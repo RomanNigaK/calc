@@ -9,8 +9,9 @@ const REMOVEMUITEMPRODUCT = "REMOVEMUITEMPRODUCT";
 const SETNULLFIND = "SETNULLFIND";
 const SETSEACRCH = "SETSEACRCH";
 const SETSTATEPRODUCTS = "SETSTATEPRODUCTS";
-const ONLOADFALSE = "ONLOADFALSE";
+const SHOWHELP = "SHOWHELP";
 const ONLOAD = "ONLOAD";
+const CLOSEHELP = "CLOSEHELP";
 
 let initialStore = {
     products: [],
@@ -21,8 +22,11 @@ let initialStore = {
     strSearch: "",
     findItems: [],
     showSearch: false,
-    onload: false
-
+    onload: false,
+    helpMessage:[
+        {name:"search",text:"Вводите искомое слово, при появлении совпадений список отобразиться автоматически"}
+    ],
+    currentHelp:""
 
 };
 
@@ -98,12 +102,14 @@ const productsReduce = (state = initialStore, action) => {
             }
         }
         case SETSEACRCH: {
+
             if (action.lenghtStr > 1) {
                 return {
                     ...state,
                     strSearch: action.text,
                     showSearch: true,
-                    findItems: state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1)
+                    findItems: state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1),
+                    currentHelp:state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1).length>0?"":state.currentHelp
                 }
             } else {
                 return {
@@ -125,11 +131,23 @@ const productsReduce = (state = initialStore, action) => {
             }
         }
         case ONLOAD: {
-console.log("load")
             return {
                 ...state,
                 onload: action.onload
+            }
+        }
+        case SHOWHELP: {
 
+            return {
+                ...state,
+                currentHelp:state.findItems.length===0?state.helpMessage.filter((i)=>(i.name==action.name))[0].text:""
+            }
+        }
+        case CLOSEHELP: {
+
+            return {
+                ...state,
+                currentHelp:""
             }
         }
 
@@ -189,6 +207,20 @@ export const setSearch = (text, lenghtStr) => {
         type: SETSEACRCH,
         text: text,
         lenghtStr: lenghtStr
+    }
+};
+export const showHelp = (itemHelp) => {
+
+    return {
+        type: SHOWHELP,
+        name: itemHelp
+    }
+};
+export const closeHelp = () => {
+
+    return {
+        type: CLOSEHELP
+
     }
 };
 

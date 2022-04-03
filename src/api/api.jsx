@@ -1,23 +1,34 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-    //baseURL:"http://localhost:7000/"
-    baseURL:"http://fortestreactnode-js.ru/"
+    baseURL: "http://localhost:7000/"
+    //baseURL:"http://fortestreactnode-js.ru/"
 
 });
 
-export const productsAPI={
-    setProducts(){
+export const productsAPI = {
+    setProducts() {
         return instance.get("products").then(
             response => response.data
-        )},
-    setProductItem(item){
+        )
+    },
+    setProductItem(item) {
         return instance.get(`products/${item}`).then(
             response => response.data
-        )},
-    updateProductItem(colt,id){
-        return instance.post(`products`,{colt:colt,id:id}).then(
-                response =>response.data.affectedRows
-        )}
+        )
+    },
+    updateProductItem(colt, id) {
+        return instance.post(`products`, {colt: colt, id: id}).then(
+            response => {
+
+                if (response.data.update) {
+                    console.log("Запись обновлена");
+
+                }else{
+                    console.warn("Запись не обновлена")
+                }
+            }
+        )
+    }
 }
 

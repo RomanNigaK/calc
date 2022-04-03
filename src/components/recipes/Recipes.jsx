@@ -1,9 +1,8 @@
 import React from "react";
 import css from "./recipes.module.css"
 import {setActivRecipe} from "../../redux/recipes-reducer";
+import {productsAPI} from "../../api/api";
 const Recipes = (props) => {
-
-    //let r = props.viewRecipe.replace("/[\r\n]/","<br />");
     console.log(props);
     let viewRecipe=(e)=>{
       props.setActivRecipe(e.target.id);

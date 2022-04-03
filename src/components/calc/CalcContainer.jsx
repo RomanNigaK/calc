@@ -2,12 +2,13 @@ import React from "react";
 import {connect} from "react-redux";
 import Calc from "./Calc";
 import {
+    closeHelp,
     getProducts,
     removeItemMyProduct,
     setColtItemMyProduct,
     setCountItemMyProduct,
     setItemMyProduct, setNullFind, setProducts, setSearch, setStateProducts,
-    setWeightCake, stateCalculation
+    setWeightCake, showHelp, stateCalculation
 } from "../../redux/products-reduce";
 
 
@@ -25,5 +26,5 @@ const CalcContainer = connect(mapStateToProps,
     {setStateProducts,setSearch,setNullFind,
         stateCalculation,removeItemMyProduct,setWeightCake,
         setItemMyProduct,setColtItemMyProduct,setCountItemMyProduct,
-        getProducts})(Calc);
+        getProducts,showHelp,closeHelp})(Calc);
 export default CalcContainer;
