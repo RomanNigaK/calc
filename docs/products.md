@@ -16,13 +16,12 @@ http://fortestreactnode-js.ru/products/2
 - count - количество используемого продукта
 - general - (1-находиться в основном списке/0-не находиться)
  
- #### post:
+ #### post:  http://fortestreactnode-js.ru/products 
  ##### Request
  id - номер элемента 
  colt - новая стоимость
  
  
  ##### Response
- 1 - запись обновледена
- 0 - запись не обновлена
- 
+ updateRows: количество измененных строк
+ update: 1/0 (успешно/нет)
