@@ -1,8 +1,8 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-    baseURL: "http://localhost:7000/"
-    //baseURL:"http://fortestreactnode-js.ru/"
+    //baseURL: "http://localhost:7000/"
+    baseURL:"http://fortestreactnode-js.ru/"
 
 });
 
@@ -24,9 +24,18 @@ export const productsAPI = {
                 if (response.data.update) {
                     console.log("Запись обновлена");
 
-                }else{
+                } else {
                     console.warn("Запись не обновлена")
                 }
+            }
+        )
+    },
+    newitemProduct(values) {
+
+        return instance.post(`products/newproduct`, values).then(
+            response => {
+                console.log(response)
+
             }
         )
     }

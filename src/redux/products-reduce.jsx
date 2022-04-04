@@ -250,4 +250,15 @@ export const getProducts = () => {
     }
 };
 
+export const newProductAdd=(value)=>{
+      return(dispatch)=>{
+        productsAPI.newitemProduct(value).then(data=>{
+
+                alert(data);
+            })
+
+
+    }
+}
+
 export default productsReduce;

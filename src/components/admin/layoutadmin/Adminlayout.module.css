@@ -1,0 +1,36 @@
+a{
+    color: black;
+    text-decoration: none;
+}
+.content{
+    display: grid;
+    grid-template-areas: "A A B B B B B B B B B B";
+}
+.menuadmin{
+    grid-area: A;
+    width: 200px;
+}
+.dataadmin{
+    grid-area: B;
+    border-left: 1px solid black;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.itemsmenu{
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+.itemmenu{
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    margin-bottom: 5px;
+}
+.headeritemmenu{
+    font-size: 12pt;
+    font-weight: bold;
+}
