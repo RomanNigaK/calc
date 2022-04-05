@@ -9,6 +9,7 @@ import Products from "./components/admin/products/Products";
 import NewProduct from "./components/admin/NewProduct/NewProduct";
 import ProductsContainer from "./components/admin/products/ProductsContainer";
 import NewProductContainer from "./components/admin/NewProduct/NewProductContainer";
+import Costs from "./components/Costs/Costs";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route index element={<HomePage/>}/>
                     <Route path="calc" element={<CalcContainer/>}/>
                     <Route path="recipes" element={<RecipesContainer/>}/>
+                    <Route path="costs" element={<Costs />}/>
                     <Route path="*" element={<HomePage/>}/>
                </Route>
                 <Route path="/admin/" element={<LayoutAdmin/>}>
@@ -28,8 +30,7 @@ function App() {
                 </Route>
             </Routes>
         </>
-
-    );
-}
+    )
+  }
 
 export default App;

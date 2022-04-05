@@ -1,0 +1,26 @@
+.costs-table {
+  table-layout: fixed;
+  width: 50%;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: solid grey 1px;
+}
+
+.costs-item__cost {
+
+}
+
+
+.costs-item__cost input {
+  border: none;
+  background-color: transparent;
+}
+
+input {
+  outline-color: grey;
+  width: 100%;
+  height: 100%;
+
+}

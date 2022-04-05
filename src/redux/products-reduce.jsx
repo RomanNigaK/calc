@@ -1,4 +1,5 @@
 import {productsAPI} from "../api/api";
+import { lodash as _ } from "lodash";
 
 const SETMUITEMPRODUCT = "SETMUITEMPRODUCT";
 const SETCOLTITEMMYPRODUCT = "SETCOLTITEMMYPRODUCT";
@@ -12,6 +13,12 @@ const SETSTATEPRODUCTS = "SETSTATEPRODUCTS";
 const SHOWHELP = "SHOWHELP";
 const ONLOAD = "ONLOAD";
 const CLOSEHELP = "CLOSEHELP";
+const SWITCH_EDITABLE_COSTS = "SWITCH_EDITABLE_COSTS";
+const SAVE_CHANGED_COSTS = "SAVE_CHANGED_COSTS";
+export const PRODUCTS_HAS_BEEN_LOADED = "PRODUCTS_HAS_BEEN_LOADED";
+export const UPDATE_COST_SUCCESS = "UPDATE_COST_SUCCESS";
+export const UPDATE_COST_FAILURE = "UPDATE_COST_FAILURE";
+export const UPDATE_COST_STARTED = "UPDATE_COST_STARTED";
 
 let initialStore = {
     products: [],
@@ -26,8 +33,12 @@ let initialStore = {
     helpMessage:[
         {name:"search",text:"Вводите искомое слово, при появлении совпадений список отобразиться автоматически"}
     ],
-    currentHelp:""
+    currentHelp:"",
 
+    costPrice:0,
+    expenses:0,
+    validSymbols:[".","0","1","2","3","4","5","6","7","8","9"],
+    costsEditable: false,
 };
 
 const productsReduce = (state = initialStore, action) => {
@@ -150,6 +161,25 @@ const productsReduce = (state = initialStore, action) => {
                 currentHelp:""
             }
         }
+        /* sokolero */
+        case SWITCH_EDITABLE_COSTS:
+          return {
+            ...state,
+            costsEditable: !state.costsEditable,
+          }
+
+        case SAVE_CHANGED_COSTS:
+          const changedProducts = action.payload.costs;
+          return {
+            ...state,
+            products: state.products.map((item, index) => {
+              return {
+                ...item,
+                name: changedProducts[index].name,
+                colt: changedProducts[index].cost,
+              }
+            })
+          }
 
         default:
             return state;
