@@ -21,6 +21,9 @@ const Layout = ()=>{
             <div className={css.linkrecipes}>
                 <NavLink   className={({isActive}) =>isActive ? css.linkcalc : css.notactivelink} to="/recipes">РЕЦЕПТЫ</NavLink>
             </div>
+            <div className={css.costs}>
+                <NavLink   className={({isActive}) =>isActive ? css.linkcalc : css.notactivelink} to="/costs">База цен</NavLink>
+            </div>
             <div className={css.content}>
                 <Outlet/>
             </div>

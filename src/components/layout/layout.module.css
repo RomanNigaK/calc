@@ -9,12 +9,12 @@ a{
 
     grid-template-areas:
             "A A A A  A A A A  A A A A"
-            "M0 M0 M0 M0 M0 M0 M1 M1 M2 M2 M3 M3"
+            "M0 M0 M0 M0 M1 M1 M2 M2 M3 M3 M4 M4"
             "C C C C  C C C C  C C C C";
 }
 .header{
     grid-area: A;
-   
+
 
     align-content: center;
 
@@ -38,6 +38,14 @@ color: rgb(255,98,66);
     text-align: center;
 
 }
+
+.costs {
+    grid-area: M4;
+    width: 150px;
+    text-align: center;
+
+}
+
 .content{
     grid-area: C;
 border-top: 2px solid rgb(255,98,66);
