@@ -14,11 +14,12 @@ export const productsAPI = {
     },
     setProductItem(item) {
         return instance.get(`products/${item}`).then(
-            response => response.data
+            response => response
+
         )
     },
     updateProductItem(colt, id) {
-        return instance.post(`products`, {colt: colt, id: id}).then(
+        return instance.put(`products`, {price: colt, id: id}).then(
             response => {
 
                 if (response.data.update) {
