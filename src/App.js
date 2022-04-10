@@ -10,15 +10,27 @@ import NewProduct from "./components/admin/NewProduct/NewProduct";
 import ProductsContainer from "./components/admin/products/ProductsContainer";
 import NewProductContainer from "./components/admin/NewProduct/NewProductContainer";
 import Costs from "./components/Costs/Costs";
+import Recipe from "./components/recipes/Recipe";
+import LayoutRecipes from "./components/recipes/LayoutRecipes";
+import LayoutRecipesContainer from "./components/recipes/LayoutRecipesContainer";
+import FirstRecipe from "./components/recipes/FirstRecipe";
+import RecipeContainer from "./components/recipes/RecipeContainer";
 
 function App() {
+
     return (
         <>
+
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<HomePage/>}/>
                     <Route path="calc" element={<CalcContainer/>}/>
-                    <Route path="recipes" element={<RecipesContainer/>}/>
+
+                    <Route path="recipes/" element={<LayoutRecipesContainer/>}>
+                        <Route index element={<FirstRecipe/>}/>
+                        <Route path=":id" element={<RecipeContainer/>}/>
+                    </Route>
+
                     <Route path="costs" element={<Costs />}/>
                     <Route path="*" element={<HomePage/>}/>
                </Route>

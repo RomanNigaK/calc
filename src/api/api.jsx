@@ -1,8 +1,10 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-    //baseURL: "http://localhost:7000/"
-    baseURL:"http://fortestreactnode-js.ru/"
+    baseURL: "http://localhost:7000/",
+    //baseURL:"https://fortestreactnode-js.ru/",
+    withCredentials: true,
+    credentials: 'include'
 
 });
 
@@ -24,7 +26,6 @@ export const productsAPI = {
 
                 if (response.data.update) {
                     console.log("Запись обновлена");
-
                 } else {
                     console.warn("Запись не обновлена")
                 }
@@ -40,5 +41,13 @@ export const productsAPI = {
             }
         )
     }
-}
+};
+export const authAPI = {
+    getUser() {
+        return instance.get("users/auth/me").then(
+            response => response,
+
+        )
+    }
+};
 

@@ -1,9 +1,8 @@
 import React from "react";
 import css from "./recipes.module.css"
-import {setActivRecipe} from "../../redux/recipes-reducer";
-import {productsAPI} from "../../api/api";
+
 const Recipes = (props) => {
-    console.log(productsAPI.updateProductItem(1,1));
+
 
     console.log(props);
     let viewRecipe=(e)=>{

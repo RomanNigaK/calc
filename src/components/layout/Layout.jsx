@@ -2,14 +2,16 @@ import React from "react";
 import css from "./layout.module.css"
 import {Outlet} from "react-router";
 import {NavLink} from "react-router-dom";
-
+import HeaderContainer from "./Header/HeaderContainer";
+console.log("initial App");
 
 const Layout = ()=>{
+
     return(
         <div className={css.container}>
             <div className={css.header}>
-                <img className={css.imglogo} src="assetc/logo.png" alt="hjh"/>
-                <div className={css.headername}> Сладкий калькулятор</div>
+                <HeaderContainer/>
+
 
             </div>
             <div className={css.linkhome}>

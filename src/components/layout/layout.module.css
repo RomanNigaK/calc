@@ -56,6 +56,17 @@ border-top: 2px solid rgb(255,98,66);
     float: left;
     width: 100px;
 }
+.avatar{
+    float: right;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.divlogo{
+    float: left;
+    min-width: 500px;
+}
+
 .headername{
 
     color: rgb(255,98,66);

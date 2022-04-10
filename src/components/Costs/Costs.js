@@ -4,7 +4,7 @@ import { productsAPI } from "../../api/api";
 import { setStateProducts } from "../../redux/products-reduce";
 import { doProductsIsLoaded } from "../../redux/actions";
 import updateCost from "../../redux/actions";
-import classNames from "classnames";
+
 import "./Costs.css";
 
 /* ========================================================================= */

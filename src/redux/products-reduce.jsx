@@ -35,8 +35,7 @@ let initialStore = {
     ],
     currentHelp:"",
 
-    costPrice:0,
-    expenses:0,
+
     validSymbols:[".","0","1","2","3","4","5","6","7","8","9"],
     costsEditable: false,
 };

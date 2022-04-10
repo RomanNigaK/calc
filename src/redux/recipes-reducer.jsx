@@ -73,9 +73,10 @@ let initialStore = {
 const recipesReducer=(state=initialStore,action)=>{
     switch (action.type) {
         case SETLOADRECIPE:{
+            //console.log(action.id)
             return {
                 ...state,
-                viewRecipe: state.recipes.filter((r)=>(r.id==action.id))[0].recipe
+                viewRecipe: state.recipes.filter((r)=>(r.id==action.id.id))[0].recipe
             }
         }
         default:
