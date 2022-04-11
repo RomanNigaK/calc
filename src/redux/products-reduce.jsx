@@ -41,7 +41,7 @@ let initialStore = {
 };
 
 const productsReduce = (state = initialStore, action) => {
-    console.log(action);
+
     switch (action.type) {
 
         case SETMUITEMPRODUCT: {

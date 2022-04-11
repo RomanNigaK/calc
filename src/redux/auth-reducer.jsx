@@ -1,19 +1,30 @@
 import {authAPI} from "../api/api";
 
-const SETUSER="SETUSER";
+const SETUSER = "SETUSER";
+const SETENTERDATAFORM = "SETENTERDATAFORM";
 
 let initialStore = {
-    name:null,
-    email:null,
-    isAuth:false
+    user: [
+        {name: null, email: null, isAuth: false}
+    ],
+    isForm: 0 //0 - форма входа / 1 - форма регистрации
+
 
 };
-const authReducer=(state=initialStore,action)=>{
+const authReducer = (state = initialStore, action) => {
     switch (action.type) {
-        case SETUSER:{
+        case SETUSER: {
             return {
                 ...state,
                 ...action.data
+            }
+        }
+        case SETENTERDATAFORM: {
+            if (state.isForm !== action.form) {
+                return {
+                    ...state,
+                    isForm: action.form
+                }
             }
         }
         default:
@@ -28,12 +39,19 @@ const setUserState = (data) => {
     }
 };
 
-export const setUser=()=>{
-    return (dispatch)=>{
-        authAPI.getUser().then(data=>{
+export const setUser = () => {
+    return (dispatch) => {
+        authAPI.getUser().then(data => {
             console.log(data);
         })
+    }
 }
+export const setEnterDataForm = (idForm) => {
+    return {
+        type: SETENTERDATAFORM,
+        form: idForm
+    }
 }
+
 
 export default authReducer;

@@ -15,6 +15,8 @@ import LayoutRecipes from "./components/recipes/LayoutRecipes";
 import LayoutRecipesContainer from "./components/recipes/LayoutRecipesContainer";
 import FirstRecipe from "./components/recipes/FirstRecipe";
 import RecipeContainer from "./components/recipes/RecipeContainer";
+import LoginPage from "./components/login/LoginPage";
+import LoginPageContainer from "./components/login/LoginPageContainer";
 
 function App() {
 
@@ -22,9 +24,11 @@ function App() {
         <>
 
             <Routes>
+
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<HomePage/>}/>
                     <Route path="calc" element={<CalcContainer/>}/>
+                    <Route path="login" element={<LoginPageContainer/>}/>
 
                     <Route path="recipes/" element={<LayoutRecipesContainer/>}>
                         <Route index element={<FirstRecipe/>}/>
