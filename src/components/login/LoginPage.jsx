@@ -1,13 +1,19 @@
 import React from "react";
 import css from "./login.module.css"
 import Login from "./login";
-import Registration from "./Registration";
+import RegistrationForm from "./Registration";
+
 
 const LoginPage = (props) => {
 let clickForm=(e)=>{
     props.setEnterDataForm(e.target.id)
-   // alert(e.target.id);
-}
+
+};
+let registartion=(value)=>{
+    props.setRegistrationData(value);
+    //alert(value.name);
+
+};
 
     return (
         <>
@@ -24,11 +30,15 @@ let clickForm=(e)=>{
                 className={props.isForm == 1 ? css.registrationuser + " " + css.activBorder : css.registrationuser + " " + css.deactivBorder}>Registration
             </div>
             <div className={css.dataloginreg}>
-                {props.isForm == 0 ? <Login/> : <Registration/>}
+
+                {props.isForm == 0 ? <Login/> : <RegistrationForm onSubmit={registartion} successfulRegistration={props.successfulRegistration} />}
 
 
             </div>
         </div>
         </>)
 }
+
+
+
 export default LoginPage;
