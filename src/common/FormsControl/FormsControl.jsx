@@ -16,6 +16,7 @@ export const Input = ({input, meta, ...props}) => {
 };
 
 export const Input2 = ({input, meta, ...props}) => {
+
     const uslovie = meta.touched && meta.error;
     return (
         <div>
@@ -33,7 +34,7 @@ export const Input2 = ({input, meta, ...props}) => {
 export const InputSex = ({input, meta, ...props}) => {
 
     return (
-        <div>
+        <div style={{display:'none'}}>
 
 
                { <input {...input}{...props} value={props.sex} />}

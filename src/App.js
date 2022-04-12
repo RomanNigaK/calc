@@ -1,5 +1,5 @@
 import HomePage from "./components/Home/Homepage";
-import {Route, Routes} from "react-router";
+import {Navigate, Route, Routes} from "react-router";
 import React from "react";
 import Layout from "./components/layout/Layout";
 import CalcContainer from "./components/calc/CalcContainer";
@@ -17,8 +17,10 @@ import FirstRecipe from "./components/recipes/FirstRecipe";
 import RecipeContainer from "./components/recipes/RecipeContainer";
 import LoginPage from "./components/login/LoginPage";
 import LoginPageContainer from "./components/login/LoginPageContainer";
+import MyProfile from "./components/Profile/myProfile";
+import MyProfileContainer from "./components/Profile/MyProfileContainer";
 
-function App() {
+function App(props) {
 
     return (
         <>
@@ -29,6 +31,14 @@ function App() {
                     <Route index element={<HomePage/>}/>
                     <Route path="calc" element={<CalcContainer/>}/>
                     <Route path="login" element={<LoginPageContainer/>}/>
+                    <Route path="profile" element={<MyProfileContainer/>}/>
+                    {/*<Route path="login" element={
+                        props.isAuth ? (
+                            <Navigate replace to="/" />
+                        ) : (
+                            <LoginPageContainer />
+                        )
+                    }/>*/}
 
                     <Route path="recipes/" element={<LayoutRecipesContainer/>}>
                         <Route index element={<FirstRecipe/>}/>

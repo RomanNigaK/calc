@@ -60,6 +60,12 @@ border-top: 2px solid rgb(255,98,66);
     float: right;
     padding-top: 10px;
     padding-right: 10px;
+    vertical-align: center;
+
+}
+.dataUser{
+    float: left;
+    margin-right: 20px;
 }
 
 .divlogo{

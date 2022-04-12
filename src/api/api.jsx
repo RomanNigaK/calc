@@ -48,10 +48,13 @@ export const authAPI = {
         )
     },
     registration(values) {
-
-
         return instance.post(`users/registration`, values).then(
             response => response.data
+        )
+    },
+    login(values){
+        return instance.post(`users/login`,values).then(
+            response=>response.data
         )
     }
 };

@@ -1,10 +1,11 @@
 import React from "react";
 import css from "./login.module.css"
-import Login from "./login";
+import Login, {LoginForm} from "./login";
 import RegistrationForm from "./Registration";
 
 
 const LoginPage = (props) => {
+
     let clickForm = (e) => {
         props.setEnterDataForm(e.target.id)
 
@@ -14,6 +15,10 @@ const LoginPage = (props) => {
         //alert(value.name);
 
     };
+    let login=(values)=>{
+
+        props.setUser(values)
+    }
 
     return (
         <>
@@ -31,7 +36,10 @@ const LoginPage = (props) => {
                 </div>
                 <div className={css.dataloginreg}>
 
-                    {props.isForm == 0 ? <Login/> : <RegistrationForm
+                    {props.isForm == 0 ? <LoginForm onSubmit={login}
+                                                    errorLogin={props.loginError}
+                                                    isAuth={props.isAuth}/> :
+                                            <RegistrationForm
                                                     onSubmit={registartion}
                                                     successfulRegistration={props.successfulRegistration}
                                                     sex={props.sex}

@@ -6,18 +6,21 @@ const SETENTERDATAFORM = "SETENTERDATAFORM";
 const SETDATAUSER = "SETDATAUSER";
 const SETSACCESSFULREG = "SETSACCESSFULREG";
 const SETSEX = "SETSEX";
+const LOGINERROR = "LOGINERROR";
 
 let initialStore = {
+    isAuth: false,
     user: [
-        {name: null, email: null, isAuth: false}
+        {name: null, email: null}
     ],
     isForm: 0, //0 - форма входа / 1 - форма регистрации
-    isRegistration:[{
-        status:false,
-        error:false,
-        massage:""
+    isRegistration: [{
+        status: false,
+        error: false,
+        massage: ""
     }],
-    sex:"man"
+    sex: "man",
+    loginError: ""
 
 
 };
@@ -27,7 +30,8 @@ const authReducer = (state = initialStore, action) => {
         case SETUSER: {
             return {
                 ...state,
-                ...action.data
+                user:action.data,
+                isAuth: true
             }
         }
         case SETENTERDATAFORM: {
@@ -38,35 +42,44 @@ const authReducer = (state = initialStore, action) => {
                 }
             }
         }
+        case LOGINERROR: {
+
+            return {
+                ...state,
+                loginError:action.text
+            }
+
+        }
         case SETDATAUSER: {
 
-                return {
-                    ...state,
-                    user: action.data
-                }
+            return {
+                ...state,
+                user: action.data,
+
+            }
 
         }
         case SETSACCESSFULREG: {
 
-                return {
-                    ...state,
-                    isRegistration: action.resultCode
-                }
+            return {
+                ...state,
+                isRegistration: action.resultCode
+            }
 
         }
         case SETSEX: {
 
-                return {
-                    ...state,
-                    sex: action.sex
-                }
+            return {
+                ...state,
+                sex: action.sex
+            }
 
         }
-        default:{
-            if(state.isRegistration.error==false){
+        default: {
+            if (state.isRegistration.error == false) {
                 return {
                     ...state,
-                    isRegistration: {status:false,message:""}
+                    isRegistration: {status: false, message: ""}
                 }
             }
             return state;
@@ -82,10 +95,24 @@ const setUserState = (data) => {
     }
 };
 
-export const setUser = () => {
+const loginError = (text) => {
+    return {
+        type: LOGINERROR,
+        text:text
+    }
+};
+
+export const setUser = (values) => {
     return (dispatch) => {
-        authAPI.getUser().then(data => {
+        authAPI.login(values).then(data => {
             console.log(data);
+            if (data.resultCode == 1) {
+                dispatch(loginError("Не верная пара логи пароль"));
+            }else{
+                dispatch(setUserState(data.user));
+                dispatch(loginError(""));
+            }
+
         })
     }
 }
@@ -96,37 +123,41 @@ export const setEnterDataForm = (idForm) => {
     }
 }
 
-const setDataUser=(data)=>{
-    return{
-        type:SETDATAUSER,
-        data:data
+const setDataUser = (data) => {
+    return {
+        type: SETDATAUSER,
+        data: data
     }
 };
-const setSuccessfulRegistration =(resultCode)=>{
-    return{
-        type:SETSACCESSFULREG,
-        resultCode:resultCode
+const setSuccessfulRegistration = (resultCode) => {
+    return {
+        type: SETSACCESSFULREG,
+        resultCode: resultCode
 
     }
 };
 
-export const setSex=(sex)=>{
-    return{
-        type:SETSEX,
-        sex:sex
+export const setSex = (sex) => {
+    return {
+        type: SETSEX,
+        sex: sex
     }
 }
-export const setRegistrationData=(values,sex)=>{
-    return (dispatch)=>{
+export const setRegistrationData = (values, sex) => {
+    return (dispatch) => {
 
-        if(values.password==values.password2){
-            values['sex']=sex;
-            authAPI.registration(values).then(response=>{
+        if (values.password == values.password2) {
+            values['sex'] = sex;
+            authAPI.registration(values).then(response => {
                     dispatch(setSuccessfulRegistration(response.resultCode));
                 }
             )
-        }else{
-            dispatch(setSuccessfulRegistration({status:true,error:true,message:"The entered passwords do not match"}));
+        } else {
+            dispatch(setSuccessfulRegistration({
+                status: true,
+                error: true,
+                message: "The entered passwords do not match"
+            }));
         }
 
     }

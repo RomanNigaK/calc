@@ -7,3 +7,12 @@ export let  getIsRegistration=(state)=>{
 export let  getSex=(state)=>{
     return (state.auth.sex)
 };
+export let  getLoginError=(state)=>{
+    return (state.auth.loginError)
+};
+export let  getIsAuth=(state)=>{
+    return (state.auth.isAuth)
+};
+export let  getUserData=(state)=>{
+    return (state.auth.user)
+};

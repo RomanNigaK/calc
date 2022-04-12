@@ -27,7 +27,9 @@ const Registration = (props) => {
                     <img onClick={genderSelextion} className={props.sex == "girl" ? css.activseximg : css.deactivseximg}
                          src={girl} alt="girl"/>
                 </div>
-
+              {/* <div>
+                    <Field component={InputSex} validate={[reqfild]} name="sex" sex={props.sex} />
+                </div>*/}
                 <div>
                     <Field component={Input2} validate={[reqfild]} name="specification" placeholder={"Specification"}/>
                 </div>
@@ -45,5 +47,10 @@ const Registration = (props) => {
         </>
     )
 };
-const RegistrationForm = reduxForm({form: "registration"})(Registration);
+const RegistrationForm = reduxForm({form: "registration",
+
+    initialValues: {
+        sex: "man"
+
+    }})(Registration);
 export default RegistrationForm;
