@@ -21,12 +21,23 @@ export const Input2 = ({input, meta, ...props}) => {
         <div>
             <div className={css.divInput}>
 
-               { <input {...input}{...props}/>}
+               { <input {...input}{...props} />}
             </div>
             <div className={css.parentDivError} >
                 {uslovie &&<div className={css.divError} style={{backgroundImage: "url(/assetc/danger.svg)"}}>{meta.error}</div>}
 
             </div>
+        </div>
+    )
+};
+export const InputSex = ({input, meta, ...props}) => {
+
+    return (
+        <div>
+
+
+               { <input {...input}{...props} value={props.sex} />}
+
         </div>
     )
 };

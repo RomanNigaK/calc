@@ -5,6 +5,7 @@ const SETUSER = "SETUSER";
 const SETENTERDATAFORM = "SETENTERDATAFORM";
 const SETDATAUSER = "SETDATAUSER";
 const SETSACCESSFULREG = "SETSACCESSFULREG";
+const SETSEX = "SETSEX";
 
 let initialStore = {
     user: [
@@ -15,10 +16,12 @@ let initialStore = {
         status:false,
         error:false,
         massage:""
-    }]
+    }],
+    sex:"man"
 
 
 };
+
 const authReducer = (state = initialStore, action) => {
     switch (action.type) {
         case SETUSER: {
@@ -48,6 +51,14 @@ const authReducer = (state = initialStore, action) => {
                 return {
                     ...state,
                     isRegistration: action.resultCode
+                }
+
+        }
+        case SETSEX: {
+
+                return {
+                    ...state,
+                    sex: action.sex
                 }
 
         }
@@ -99,10 +110,17 @@ const setSuccessfulRegistration =(resultCode)=>{
     }
 };
 
-export const setRegistrationData=(values)=>{
+export const setSex=(sex)=>{
+    return{
+        type:SETSEX,
+        sex:sex
+    }
+}
+export const setRegistrationData=(values,sex)=>{
     return (dispatch)=>{
 
         if(values.password==values.password2){
+            values['sex']=sex;
             authAPI.registration(values).then(response=>{
                     dispatch(setSuccessfulRegistration(response.resultCode));
                 }
