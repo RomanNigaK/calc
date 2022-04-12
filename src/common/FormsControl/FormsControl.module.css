@@ -1,3 +1,4 @@
+
 .formControl{
 
 }
@@ -6,4 +7,26 @@
 }
 .formControl.error span{
     color: red;
+}
+
+.divError{
+position: absolute;
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    color: red;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+.divNone{
+    display: none;
+}
+.parentDivError{
+
+    float: right;
+
+}
+.divInput{
+    float: left;
+   width: 100%;
 }

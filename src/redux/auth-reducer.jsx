@@ -101,10 +101,16 @@ const setSuccessfulRegistration =(resultCode)=>{
 
 export const setRegistrationData=(values)=>{
     return (dispatch)=>{
-        authAPI.registration(values).then(response=>{
-                dispatch(setSuccessfulRegistration(response.resultCode));
-            }
-        )
+
+        if(values.password==values.password2){
+            authAPI.registration(values).then(response=>{
+                    dispatch(setSuccessfulRegistration(response.resultCode));
+                }
+            )
+        }else{
+            dispatch(setSuccessfulRegistration({status:true,error:true,message:"The entered passwords do not match"}));
+        }
+
     }
 }
 
