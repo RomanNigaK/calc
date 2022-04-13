@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import {setUser} from "../../../redux/auth-reducer";
+import {exitApp, setUser} from "../../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {getIsAuth, getUserData} from "../../../redux/selectors";
 class HeaderContainer extends React.Component{
@@ -15,7 +15,7 @@ class HeaderContainer extends React.Component{
     }
     render() {
         return (
-            <div><div onClick={this.newAjax}>2121</div><Header isAuth={this.props.isAuth} user={this.props.user} /></div>
+            <div><div onClick={this.newAjax}>2121</div><Header exitApp={this.props.exitApp} isAuth={this.props.isAuth} user={this.props.user} /></div>
         );
     }
 }
@@ -28,4 +28,4 @@ return{
 };
 
 
-export default connect (mapStateToProps,{setUser})(Header);
+export default connect (mapStateToProps,{setUser,exitApp})(Header);

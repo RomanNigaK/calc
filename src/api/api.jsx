@@ -42,9 +42,9 @@ export const productsAPI = {
     }
 };
 export const authAPI = {
-    getUser() {
+    isAuthUser() {
         return instance.get("users/auth/me").then(
-            response => response,
+            response => response.data,
         )
     },
     registration(values) {
@@ -55,6 +55,11 @@ export const authAPI = {
     login(values){
         return instance.post(`users/login`,values).then(
             response=>response.data
+        )
+    },
+    exitUser(){
+        return instance.get("users/exit").then(
+            response => response,
         )
     }
 };

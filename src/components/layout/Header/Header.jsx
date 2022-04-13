@@ -6,6 +6,11 @@ import girl from "./../../../svg/girl.svg";
 
 const Header =(props)=>{
 
+let exitUser=()=>{
+
+    props.exitApp();
+}
+
 if(props.isAuth){
     return (
         <div>
@@ -17,7 +22,7 @@ if(props.isAuth){
             <div className={css.avatar}>
                 <div className={css.dataUser}>
                     <div>{props.user[0].name}</div>
-                    <div>Выход</div>
+                    <div onClick={exitUser}>Выход</div>
                 </div>
                 <NavLink to = "/profile"><img src={props.user[0].sex=="man"?boy:girl} alt="hjh"/></NavLink>
             </div>

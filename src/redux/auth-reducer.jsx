@@ -54,7 +54,8 @@ const authReducer = (state = initialStore, action) => {
 
             return {
                 ...state,
-                user: action.data,
+                user: [],
+                isAuth: false
 
             }
 
@@ -116,6 +117,19 @@ export const setUser = (values) => {
         })
     }
 }
+export const authMe=()=>{
+    return (dispatch)=>{
+        authAPI.isAuthUser().then(response=>{
+               if(response.length===1){
+                   dispatch(setUserState(response));
+               }
+        }
+
+        );
+
+
+    }
+}
 export const setEnterDataForm = (idForm) => {
     return {
         type: SETENTERDATAFORM,
@@ -123,10 +137,10 @@ export const setEnterDataForm = (idForm) => {
     }
 }
 
-const setDataUser = (data) => {
+const setDataUser = () => {
     return {
-        type: SETDATAUSER,
-        data: data
+        type: SETDATAUSER
+
     }
 };
 const setSuccessfulRegistration = (resultCode) => {
@@ -162,6 +176,16 @@ export const setRegistrationData = (values, sex) => {
 
     }
 }
+export const exitApp=()=>{
+   return  (dispatch)=>{
+        authAPI.exitUser().then(response=>{
+            if(response.status===200){
+                dispatch(setDataUser())
+            }
 
+       })
+    }
+
+}
 
 export default authReducer;
