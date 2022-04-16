@@ -8,7 +8,7 @@ const MyProfile=(props)=>{
         if (!props.isAuth) {
             navigate('/');
         }
-    });
+    },[]);
     return(
         <h2>Мой профиль</h2>
     )

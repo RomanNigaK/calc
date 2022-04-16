@@ -15,16 +15,23 @@ import MyProfileContainer from "./components/Profile/MyProfileContainer";
 import {authAPI} from "./api/api";
 import {connect} from "react-redux";
 import {authMe} from "./redux/auth-reducer";
+import {initializedApp} from "./redux/app-reducer";
+import PreloaderApp from "./common/preloader/PreloaderApp";
 
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.authMe();
+        this.props.initializedApp();
 
     }
 
-    render() {
 
+    render() {
+        if (!this.props.initialized) {
+            return (
+                <PreloaderApp/>
+            )
+        }
 
         return (
             <>
@@ -64,7 +71,11 @@ class App extends React.Component {
     }
 }
 
+let mapStateToProps=(state)=>{
+    return{
+        initialized:state.app.initialized
+    }
+}
 
-
-const AppContainer = connect(null,{authMe})(App);
+const AppContainer = connect(mapStateToProps,{initializedApp})(App);
 export default AppContainer;

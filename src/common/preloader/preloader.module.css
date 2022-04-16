@@ -1,0 +1,14 @@
+/*PreloaderAPP*/
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+
+}
+
+.box div {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}

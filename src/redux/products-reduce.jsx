@@ -270,7 +270,7 @@ const onLoad = (onload) => {
 export const getProducts = () => {
     return (dispatch) => {
         dispatch(onLoad(true));
-        productsAPI.setProducts().then(data => {
+        return productsAPI.setProducts().then(data => {
             dispatch(setStateProducts(data));
             dispatch(onLoad(false))
         });

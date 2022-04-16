@@ -3,9 +3,9 @@ import css from "./products.module.css"
 
 const Products = (props) => {
 
-    useEffect(() => {
+    /*useEffect(() => {
         props.getProducts();
-    }, []);
+    }, []);*/
 
     let list = props.products.map((d) => (
         <tr>

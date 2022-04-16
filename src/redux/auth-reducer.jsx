@@ -119,7 +119,7 @@ export const setUser = (values) => {
 }
 export const authMe=()=>{
     return (dispatch)=>{
-        authAPI.isAuthUser().then(response=>{
+        return authAPI.isAuthUser().then(response=>{
                if(response.length===1){
                    dispatch(setUserState(response));
                }
@@ -129,6 +129,7 @@ export const authMe=()=>{
 
 
     }
+
 }
 export const setEnterDataForm = (idForm) => {
     return {
