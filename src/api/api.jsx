@@ -5,7 +5,6 @@ const instance = axios.create({
     baseURL:"https://fortestreactnode-js.ru/",
     withCredentials: true,
     credentials: 'include'
-
 });
 
 
@@ -76,4 +75,3 @@ export const authAPI = {
         )
     }
 };
-

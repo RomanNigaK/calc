@@ -13,10 +13,13 @@ export let  getLoginError=(state)=>{
 export let  getIsAuth=(state)=>{
     return (state.auth.isAuth)
 };
-export let  getUserData=(state)=>{
+export let getUserData=(state)=>{
     return (state.auth.user)
 };
+<<<<<<< HEAD
 
 export let getPosts=(state)=>{
     return state.home.posts;
 }
+=======
+>>>>>>> Added ProfileCosts, ProfileCredentials, bugfix layout

@@ -15,7 +15,6 @@ let reducers = combineReducers({
     auth:authReducer,
     app:appReducer,
     home:homeReducer
-
 });
 
 

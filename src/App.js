@@ -12,6 +12,8 @@ import FirstRecipe from "./components/recipes/FirstRecipe";
 import RecipeContainer from "./components/recipes/RecipeContainer";
 import LoginPageContainer from "./components/login/LoginPageContainer";
 import MyProfileContainer from "./components/Profile/MyProfileContainer";
+import ProfileCredentials from "./components/Profile/ProfileCredentials";
+import ProfileMyCosts from "./components/Profile/ProfileMyCosts";
 import {authAPI} from "./api/api";
 import {connect} from "react-redux";
 import {authMe} from "./redux/auth-reducer";
@@ -36,37 +38,29 @@ class App extends React.Component {
 
         return (
             <>
-                {/*<div onClick={clickisAuth}>Click</div>*/}
-                <Routes>
-
-                    <Route path="/" element={<Layout/>}>
-                        <Route index element={<HomePageContainer/>}/>
-                        <Route path="calc" element={<CalcContainer/>}/>
-                        <Route path="login" element={<LoginPageContainer/>}/>
-                        <Route path="profile" element={<MyProfileContainer/>}/>
-                        {/*<Route path="login" element={
-                        props.isAuth ? (
-                            <Navigate replace to="/" />
-                        ) : (
-                            <LoginPageContainer />
-                        )
-                    }/>*/}
-
-                        <Route path="recipes/" element={<LayoutRecipesContainer/>}>
-                            <Route index element={<FirstRecipe/>}/>
-                            <Route path=":id" element={<RecipeContainer/>}/>
-                        </Route>
-
-                        <Route path="costs" element={<Costs/>}/>
-                        <Route path="*" element={<HomePage/>}/>
-                    </Route>
-                    <Route path="/admin/" element={<LayoutAdmin/>}>
-                        <Route index element={<ProductsContainer/>}/>
-                        <Route path="products" element={<ProductsContainer/>}/>
-                        <Route path="newproduct" element={<NewProductContainer/>}/>
-                        <Route path="*" element={<ProductsContainer/>}/>
-                    </Route>
-                </Routes>
+              <Routes>
+                <Route path="/" element={<Layout/>}>
+                  <Route index element={<HomePage/>}/>
+                  <Route path="calc" element={<CalcContainer/>}/>
+                  <Route path="login" element={<LoginPageContainer/>}/>
+                  <Route path="profile" element={<MyProfileContainer/>}>
+                    <Route index element={<ProfileCredentials />}/>
+                    <Route path="mycosts" element={<ProfileMyCosts/>}/>
+                  </Route>
+                  <Route path="recipes/" element={<LayoutRecipesContainer/>}>
+                    <Route index element={<FirstRecipe/>}/>
+                    <Route path=":id" element={<RecipeContainer/>}/>
+                  </Route>
+                  <Route path="costs" element={<Costs/>}/>
+                  <Route path="*" element={<HomePage/>}/>
+                </Route>
+                <Route path="/admin/" element={<LayoutAdmin/>}>
+                  <Route index element={<ProductsContainer/>}/>
+                  <Route path="products" element={<ProductsContainer/>}/>
+                  <Route path="newproduct" element={<NewProductContainer/>}/>
+                  <Route path="*" element={<ProductsContainer/>}/>
+                </Route>
+              </Routes>
             </>
         )
     }

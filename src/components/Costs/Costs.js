@@ -17,7 +17,6 @@ const CostItem = ({ id, name, cost, dispatch }) => {
   }
 
   const saveChanges = (id, costState) => async () => {
-
     if (!readOnly) {
       dispatch(updateCost({ id: id, value: costState }));
       switchReadonly(true);

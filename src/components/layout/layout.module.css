@@ -1,90 +1,95 @@
-a{
+.container {
+  display: grid;
+  grid-gap: 5px;
+  padding: 10px 20px;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+          "header"
+          "nav"
+          "content";
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.divlogo {
+  display: flex;
+  align-items: center;
+}
+
+.imglogo {
+  width: 100px;
+  margin-right: 32px;
+}
+
+.headername {
     color: rgb(255,98,66);
-}
-.container{
-
-    display: grid;
-    grid-gap: 5px;
-    padding: 10px;
-
-    grid-template-areas:
-            "A A A A  A A A A  A A A A"
-            "M0 M0 M0 M0 M1 M1 M2 M2 M3 M3 M4 M4"
-            "C C C C  C C C C  C C C C";
-}
-.header{
-    grid-area: A;
-
-
-    align-content: center;
-
+    font-size: 18pt;
 }
 
-.linkhome{
-    grid-area: M1;
-color: rgb(255,98,66);
-    text-align: center;
-    width: 150px;
+.avatar__box {
+  display: flex;
+  align-items: center;
 }
-.linkcalc{
-    grid-area: M2;
-    width: 150px;
-    text-align: center;
 
+.avatar {
+  width: 60px;
 }
-.linkrecipes{
-    grid-area: M3;
-    width: 150px;
-    text-align: center;
 
+.info {
+  padding: 6px 10px;
+  font-weight: 600;
+}
+
+.logout {
+  padding: 6px 10px;
+  background-color: #e5e5e5;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #83add9;
+  border-radius: 5px;
+  transition: 1s ease-out;
+}
+
+.nav {
+  grid-area: nav;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 12px;
+}
+
+.content {
+  grid-area: content;
+  border-top: 2px solid rgb(255,98,66);
+  text-align: center;
+}
+
+.link {
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-right: 64px;
+}
+
+.notactivelink {
+  composes: link;
+  font-weight: 400;
 }
 
 .costs {
-    grid-area: M4;
     width: 150px;
     text-align: center;
-
 }
 
-.content{
-    grid-area: C;
-border-top: 2px solid rgb(255,98,66);
-    text-align: center;
-}
-
-.imglogo{
-    float: left;
-    width: 100px;
-}
-.avatar{
-    float: right;
-    padding-top: 10px;
-    padding-right: 10px;
-    vertical-align: center;
-
-}
 .dataUser{
     float: left;
     margin-right: 20px;
-}
-
-.divlogo{
-    float: left;
-    min-width: 500px;
-}
-
-.headername{
-
-    color: rgb(255,98,66);
-    font-size: 18pt;
-    padding-top: 50px;
-    padding-left: 20px;
-}
-a.activelink{
-
-    text-decoration-line: underline;
-}
-a.notactivelink{
-
-    text-decoration-line: none;
 }
