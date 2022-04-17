@@ -6,7 +6,7 @@ const LayoutRecipes=(props)=>{
 
     let r = props.viewRecipe.split("<br>").map(item=><div>{item}</div>);
 
-    let listTitle = props.title.map((r)=>(<div><NavLink to={`${r.id}`}>{r.title}</NavLink></div>));
+    let listTitle = props.title.map((r)=>(<div key={r.id+"_f"}><NavLink to={`${r.id}`}>{r.title}</NavLink></div>));
     return(
         <div className={css.content}>
             <div className={css.listtitlerecipes}>

@@ -27,14 +27,13 @@ const setInitialized = () => {
 };
 
 export const initializedApp = () => async (dispatch) => {
-    let NotIsAuthUser = "[{\"total\":0,\"products\":[]}]"
     let promiseAuthMe = await dispatch(authMe());
-
+    let obj = "[{\"total\":0,\"products\":[]}]"
     console.log(promiseAuthMe)
-
-    let promiseProducts = await dispatch(getProducts(!promiseAuthMe.resultCode ? promiseAuthMe.user[0].myprice : NotIsAuthUser));
-
-
+    if (promiseAuthMe.resultCode === 0) {
+        obj = promiseAuthMe.user[0].myprice
+    }
+    let promiseProducts = await dispatch(getProducts(obj));
     Promise.all([promiseAuthMe, promiseProducts]);
     dispatch(setInitialized());
 }

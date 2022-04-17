@@ -135,7 +135,7 @@ const productsReduce = (state = initialStore, action) => {
         case SETSTATEPRODUCTS: {
 
            let  myPriceObj =  JSON.parse(action.price);
-            console.log(myPriceObj[0].products)
+           // console.log(myPriceObj[0].products)
 
 
             if(myPriceObj[0].total===0){
@@ -263,7 +263,7 @@ export const closeHelp = () => {
     }
 };
 
-export const setStateProducts = (data, myPrice) => {
+export const setStateProducts = (data, myPrice="[{\"total\":0,\"products\":[]}]") => {
 
     return {
         type: SETSTATEPRODUCTS,

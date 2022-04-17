@@ -6,11 +6,11 @@ import {productsAPI} from "../../api/api";
 
 const Calc = (props) => {
 
-    useEffect(() => {
+ /*   useEffect(() => {
 
         props.getProducts();
 
-    }, []);
+    }, []);*/
 
 
     console.log(props)
@@ -111,11 +111,11 @@ const Calc = (props) => {
     };
 
     let list = props.products.products.map(
-        (item) => (<div>
+        (item) => (<div key={item.id+"g"}>
             {chekProductItem(item, "general")}
         </div>));
 
-    let myList = <div className={css.emptylist}>Вы еще ничего не выбрали</div>;
+    let myList = <tr><td><span className={css.emptylist}>Вы еще ничего не выбрали</span></td></tr>;
     if (props.products.selectedProducts.length > 0) {
 
         myList = props.products.selectedProducts.map((item) => (
@@ -123,10 +123,10 @@ const Calc = (props) => {
                 <td><span>{item.name}</span></td>
 
                 <td>
-                    <input id={item.id} onChange={enterDataColt} className={css.inputmylistproducts}
-                           placeholder="0.00" value={item.colt} autocomplete="off"/>р./{item.edizm}</td>
-                <td><input id={item.id} onChange={enterDataCount} className={css.inputmylistproducts} type="text"
-                           placeholder="0.00" value={item.count} autocomplete="off"/>{item.edizm}</td>
+                    <input id={item.id+"_colt"} onChange={enterDataColt} className={css.inputmylistproducts}
+                           placeholder="0.00" value={item.colt} autoComplete="off"/>р./{item.edizm}</td>
+                <td><input id={item.id+"_edizm"} onChange={enterDataCount} className={css.inputmylistproducts} type="text"
+                           placeholder="0.00" value={item.count} autoComplete="off"/>{item.edizm}</td>
             </tr>
         ))
     }
