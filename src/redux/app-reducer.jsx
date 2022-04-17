@@ -28,7 +28,7 @@ const setInitialized = () => {
 
 export const initializedApp = () => async (dispatch) => {
     let promiseAuthMe = await dispatch(authMe());
-    let obj = "[{\"total\":0,\"products\":[]}]"
+    let obj = "{\"total\":0,\"products\":[]}"
     console.log(promiseAuthMe)
     if (promiseAuthMe.resultCode === 0) {
         obj = promiseAuthMe.user[0].myprice

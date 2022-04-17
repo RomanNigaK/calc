@@ -138,11 +138,11 @@ const productsReduce = (state = initialStore, action) => {
            // console.log(myPriceObj[0].products)
 
 
-            if(myPriceObj[0].total===0){
+            if(myPriceObj.total===0){
                 console.log("Нет массива пользовательских цен")
             }else{
                 console.log("Есть массива пользовательских цен")
-                myPriceObj[0].products.forEach((el) => action.data.find((i) => i.id === el.id).colt = el.price);
+                myPriceObj.products.forEach((el) => action.data.find((i) => i.id === el.id).colt = el.price);
             }
 
             return {

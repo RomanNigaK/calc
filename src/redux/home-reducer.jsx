@@ -15,7 +15,7 @@ let initialStore = {
 };
 
 const homeReducer = (state = initialStore, action) => {
-    switch (action.type) {
+   /* switch (action.type) {
         case INITIALIZED_SUCCESSFUL: {
             return {
                 ...state,
@@ -25,7 +25,8 @@ const homeReducer = (state = initialStore, action) => {
 
         default:
             return state;
-    }
+    }*/
+   return state
 };
 
 

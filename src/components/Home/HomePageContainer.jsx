@@ -3,6 +3,7 @@ import HomePage from "./Homepage";
 import {getPosts} from "../../redux/selectors";
 
 let mapStateToProps=(state)=>{
+
     return{
        posts:getPosts(state)
     }
