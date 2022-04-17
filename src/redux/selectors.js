@@ -16,10 +16,7 @@ export let  getIsAuth=(state)=>{
 export let getUserData=(state)=>{
     return (state.auth.user)
 };
-<<<<<<< HEAD
 
 export let getPosts=(state)=>{
     return state.home.posts;
 }
-=======
->>>>>>> Added ProfileCosts, ProfileCredentials, bugfix layout
