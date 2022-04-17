@@ -52,6 +52,10 @@ const CostsForm = ({ products }) => {
               </>
               : null
           }
+<<<<<<< HEAD
+=======
+          { console.log(submitting) }
+>>>>>>> Update CostsForm.js
         </div>
       </form>
     )}
