@@ -28,7 +28,8 @@ const updateCost = ({ id, value }) => async (dispatch) => {
   dispatch(updateCostStarted());
 
   try {
-    const response = await productsAPI.updateProductItem(value, id);
+    ///const response = await productsAPI.updateProductItem(value, id);
+    const response = await productsAPI.updateProductItem(1,[{total:2,products:[{id: 2, price: 200}, {id: 3, price: 400}]}]);
     dispatch(updateCostSuccess());
   } catch(e) {
     console.log(e.message)

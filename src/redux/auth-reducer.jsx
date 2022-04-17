@@ -30,7 +30,7 @@ const authReducer = (state = initialStore, action) => {
         case SETUSER: {
             return {
                 ...state,
-                user:action.data,
+                user: action.data,
                 isAuth: true
             }
         }
@@ -46,7 +46,7 @@ const authReducer = (state = initialStore, action) => {
 
             return {
                 ...state,
-                loginError:action.text
+                loginError: action.text
             }
 
         }
@@ -99,38 +99,35 @@ const setUserState = (data) => {
 const loginError = (text) => {
     return {
         type: LOGINERROR,
-        text:text
+        text: text
     }
 };
 
 export const setUser = (values) => {
-    return (dispatch) => {
-        authAPI.login(values).then(data => {
+    return async (dispatch) => {
+        let data = await authAPI.login(values);
+        if (data.resultCode == 1) {
+            dispatch(loginError("Не верная пара логи пароль"));
+        } else {
             console.log(data);
-            if (data.resultCode == 1) {
-                dispatch(loginError("Не верная пара логи пароль"));
-            }else{
-                dispatch(setUserState(data.user));
-                dispatch(loginError(""));
-            }
-
-        })
-    }
-}
-export const authMe=()=>{
-    return (dispatch)=>{
-        return authAPI.isAuthUser().then(response=>{
-               if(response.length===1){
-                   dispatch(setUserState(response));
-               }
+            dispatch(setUserState(data.user));
+            dispatch(loginError(""));
         }
-
-        );
-
-
     }
-
 }
+export const authMe = () => async dispatch => {
+
+    let response = await authAPI.isAuthUser();
+
+    if (response.resultCode === 0) {
+          //  console.log(response[0].myPrice)
+        dispatch(setUserState(response.user));
+        return response
+    }
+    return response
+}
+
+
 export const setEnterDataForm = (idForm) => {
     return {
         type: SETENTERDATAFORM,
@@ -159,14 +156,14 @@ export const setSex = (sex) => {
     }
 }
 export const setRegistrationData = (values, sex) => {
-    return (dispatch) => {
+    return async (dispatch) => {
 
         if (values.password == values.password2) {
             values['sex'] = sex;
-            authAPI.registration(values).then(response => {
-                    dispatch(setSuccessfulRegistration(response.resultCode));
-                }
-            )
+            let response = await authAPI.registration(values);
+            dispatch(setSuccessfulRegistration(response.resultCode));
+
+
         } else {
             dispatch(setSuccessfulRegistration({
                 status: true,
@@ -177,14 +174,14 @@ export const setRegistrationData = (values, sex) => {
 
     }
 }
-export const exitApp=()=>{
-   return  (dispatch)=>{
-        authAPI.exitUser().then(response=>{
-            if(response.status===200){
+export const exitApp = () => {
+    return (dispatch) => {
+        authAPI.exitUser().then(response => {
+            if (response.status === 200) {
                 dispatch(setDataUser())
             }
 
-       })
+        })
     }
 
 }

@@ -6,7 +6,7 @@ const INITIALIZED_SUCCESSFUL = "INITIALIZED_SUCCESSFUL";
 
 let initialStore = {
     initialized: false,
- };
+};
 
 const appReducer = (state = initialStore, action) => {
     switch (action.type) {
@@ -19,26 +19,24 @@ const appReducer = (state = initialStore, action) => {
 
         default:
             return state;
-           }
+    }
 };
 
-const setInitialized = () => {return {type: INITIALIZED_SUCCESSFUL}};
+const setInitialized = () => {
+    return {type: INITIALIZED_SUCCESSFUL}
+};
 
-export const initializedApp =()=>(dispatch)=>{
-        let promiseAuthMe = dispatch(authMe());
-        let promiseProducts = dispatch(getProducts());
+export const initializedApp = () => async (dispatch) => {
+    let NotIsAuthUser = "[{\"total\":0,\"products\":[]}]"
+    let promiseAuthMe = await dispatch(authMe());
 
-            Promise.all([promiseAuthMe,promiseProducts]).then(()=>{
-                dispatch(setInitialized());
-            })
+    console.log(promiseAuthMe)
+
+    let promiseProducts = await dispatch(getProducts(!promiseAuthMe.resultCode ? promiseAuthMe.user[0].myprice : NotIsAuthUser));
 
 
-
+    Promise.all([promiseAuthMe, promiseProducts]);
+    dispatch(setInitialized());
 }
-
-
-
-
-
 
 export default appReducer;

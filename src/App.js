@@ -17,6 +17,7 @@ import {connect} from "react-redux";
 import {authMe} from "./redux/auth-reducer";
 import {initializedApp} from "./redux/app-reducer";
 import PreloaderApp from "./common/preloader/PreloaderApp";
+import HomePageContainer from "./components/Home/HomePageContainer";
 
 class App extends React.Component {
 
@@ -39,7 +40,7 @@ class App extends React.Component {
                 <Routes>
 
                     <Route path="/" element={<Layout/>}>
-                        <Route index element={<HomePage/>}/>
+                        <Route index element={<HomePageContainer/>}/>
                         <Route path="calc" element={<CalcContainer/>}/>
                         <Route path="login" element={<LoginPageContainer/>}/>
                         <Route path="profile" element={<MyProfileContainer/>}/>

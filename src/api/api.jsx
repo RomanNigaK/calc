@@ -1,12 +1,13 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-    //baseURL: "http://localhost:3000/",
+   //baseURL: "http://localhost:3000/",
     baseURL:"https://fortestreactnode-js.ru/",
     withCredentials: true,
     credentials: 'include'
 
 });
+
 
 export const productsAPI = {
     setProducts() {
@@ -19,7 +20,19 @@ export const productsAPI = {
             response => response
         )
     },
-    updateProductItem(colt, id) {
+    updateProductItem(user,obj) {
+        return instance.put(`products`,{user:user,myPrice:JSON.stringify(obj)}).then(
+            response => {
+
+                if (response.data.update) {
+                    console.log("Запись обновлена");
+                } else {
+                    console.warn("Запись не обновлена")
+                }
+            }
+        )
+    },
+ /*    updateProductItem(colt, id) {
         return instance.put(`products`, {price: colt, id: id}).then(
             response => {
 
@@ -31,7 +44,7 @@ export const productsAPI = {
             }
         )
     },
-    newitemProduct(values) {
+ */   newitemProduct(values) {
 
         return instance.post(`products/newproduct`, values).then(
             response => {

@@ -1,5 +1,5 @@
 import {productsAPI} from "../api/api";
-import { lodash as _ } from "lodash";
+import {lodash as _} from "lodash";
 
 const SETMUITEMPRODUCT = "SETMUITEMPRODUCT";
 const SETCOLTITEMMYPRODUCT = "SETCOLTITEMMYPRODUCT";
@@ -30,13 +30,13 @@ let initialStore = {
     findItems: [],
     showSearch: false,
     onload: false,
-    helpMessage:[
-        {name:"search",text:"Вводите искомое слово, при появлении совпадений список отобразиться автоматически"}
+    helpMessage: [
+        {name: "search", text: "Вводите искомое слово, при появлении совпадений список отобразиться автоматически"}
     ],
-    currentHelp:"",
+    currentHelp: "",
 
 
-    validSymbols:[".","0","1","2","3","4","5","6","7","8","9"],
+    validSymbols: [".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
     costsEditable: false,
 };
 
@@ -119,7 +119,7 @@ const productsReduce = (state = initialStore, action) => {
                     strSearch: action.text,
                     showSearch: true,
                     findItems: state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1),
-                    currentHelp:state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1).length>0?"":state.currentHelp
+                    currentHelp: state.products.filter(item => item.name.toUpperCase().indexOf(action.text.toUpperCase()) !== -1).length > 0 ? "" : state.currentHelp
                 }
             } else {
                 return {
@@ -134,10 +134,20 @@ const productsReduce = (state = initialStore, action) => {
         }
         case SETSTATEPRODUCTS: {
 
+           let  myPriceObj =  JSON.parse(action.price);
+            console.log(myPriceObj[0].products)
+
+
+            if(myPriceObj[0].total===0){
+                console.log("Нет массива пользовательских цен")
+            }else{
+                console.log("Есть массива пользовательских цен")
+                myPriceObj[0].products.forEach((el) => action.data.find((i) => i.id === el.id).colt = el.price);
+            }
+
             return {
                 ...state,
                 products: action.data
-
             }
         }
         case ONLOAD: {
@@ -150,35 +160,35 @@ const productsReduce = (state = initialStore, action) => {
 
             return {
                 ...state,
-                currentHelp:state.findItems.length===0?state.helpMessage.filter((i)=>(i.name==action.name))[0].text:""
+                currentHelp: state.findItems.length === 0 ? state.helpMessage.filter((i) => (i.name == action.name))[0].text : ""
             }
         }
         case CLOSEHELP: {
 
             return {
                 ...state,
-                currentHelp:""
+                currentHelp: ""
             }
         }
         /* sokolero */
         case SWITCH_EDITABLE_COSTS:
-          return {
-            ...state,
-            costsEditable: !state.costsEditable,
-          }
+            return {
+                ...state,
+                costsEditable: !state.costsEditable,
+            }
 
         case SAVE_CHANGED_COSTS:
-          const changedProducts = action.payload.costs;
-          return {
-            ...state,
-            products: state.products.map((item, index) => {
-              return {
-                ...item,
-                name: changedProducts[index].name,
-                colt: changedProducts[index].cost,
-              }
-            })
-          }
+            const changedProducts = action.payload.costs;
+            return {
+                ...state,
+                products: state.products.map((item, index) => {
+                    return {
+                        ...item,
+                        name: changedProducts[index].name,
+                        colt: changedProducts[index].cost,
+                    }
+                })
+            }
 
         default:
             return state;
@@ -253,25 +263,29 @@ export const closeHelp = () => {
     }
 };
 
-export const setStateProducts = (data) => {
+export const setStateProducts = (data, myPrice) => {
+
     return {
         type: SETSTATEPRODUCTS,
-        data: data
+        data: data,
+        price: myPrice
     }
 }
 const onLoad = (onload) => {
     return {
         type: ONLOAD,
-        onload:onload
+        onload: onload
     }
 }
 
 
-export const getProducts = () => {
+export const getProducts = (myPrice) => {
+
+console.log(myPrice)
     return (dispatch) => {
         dispatch(onLoad(true));
         return productsAPI.setProducts().then(data => {
-            dispatch(setStateProducts(data));
+            dispatch(setStateProducts(data, myPrice));
             dispatch(onLoad(false))
         });
 
@@ -279,12 +293,12 @@ export const getProducts = () => {
     }
 };
 
-export const newProductAdd=(value)=>{
-      return(dispatch)=>{
-        productsAPI.newitemProduct(value).then(data=>{
+export const newProductAdd = (value) => {
+    return (dispatch) => {
+        productsAPI.newitemProduct(value).then(data => {
 
-                alert(data);
-            })
+            alert(data);
+        })
 
 
     }

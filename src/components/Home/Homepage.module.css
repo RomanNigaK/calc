@@ -1,0 +1,31 @@
+.content{
+    display: flex;
+    align-items: flex-end;
+    justify-content:space-around;
+    flex-wrap: wrap
+
+}
+.post{
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    height: 400px;
+    margin:10px;
+    margin-bottom: 100px;
+
+}
+.post img {
+    width: inherit;
+    height: inherit;
+}
+.likeText{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 1px solid black;
+}
+.like img{
+    width: 30px;
+    padding-left: 30px;
+}

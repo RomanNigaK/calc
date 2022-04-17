@@ -16,3 +16,7 @@ export let  getIsAuth=(state)=>{
 export let  getUserData=(state)=>{
     return (state.auth.user)
 };
+
+export let getPosts=(state)=>{
+    return state.home.posts;
+}
