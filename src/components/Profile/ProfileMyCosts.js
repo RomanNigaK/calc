@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Costs from "../Costs/Costs";
+import CostsForm from "./CostsForm";
+// import { uuid } from "uuidv4";
 import styles from "./Profile.module.css";
 
 /* ---------------------------------------- */
@@ -21,8 +23,9 @@ const switcher = (currFilter, ownFilter) => {
 
 /* ---------------------------------------- */
 function CostItem({ item }) {
+  // const uid = uuid();
   return(
-    <li className={styles.item}>
+    <li key={ item.index } className={styles.item}>
       <span className={styles.item__name}>{item.name}</span>
       <input className={styles.item__input} type="text" defaultValue={item.colt} />
     </li>
@@ -49,13 +52,7 @@ export default function ProfileMyCosts() {
         <button onClick={choiceFilter} className={switcher(currFilter, "general")}  data-filter-type="general">Только основные</button>
         <button onClick={choiceFilter} className={switcher(currFilter, "other")}  data-filter-type="other">Другое</button>
       </div>
-      <div className={styles.costs}>
-        <ul className={styles.costs__ul}>
-          {
-            filtered.map((item) => <CostItem item={item} />)
-          }
-        </ul>
-      </div>
+      <CostsForm products={filtered} />
     </>
   );
 }

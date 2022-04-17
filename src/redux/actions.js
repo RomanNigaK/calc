@@ -5,8 +5,9 @@ import {
   UPDATE_COST_STARTED,
   PRODUCTS_HAS_BEEN_LOADED,
 } from "./products-reduce";
+import * as types from "./types";
 import { productsAPI } from "../api/api";
-const apiURL = "http://fortestreactnode-js.ru/";
+import sleep from "../utils/sleep";
 
 
 
@@ -45,3 +46,59 @@ export const doProductsIsLoaded = () => {
 }
 
 export default updateCost;
+
+
+
+/*  ====== UPDATE USER COSTS =================================================== */
+/* --------------------------------------- */
+const prepareCostsToUpdate = (values) => {
+  const updated = []
+  Object.entries(values).forEach(([ key, value ]) => {
+    const id = parseInt(key.split("_")[1]);
+    updated.push({ id: id, price: value });
+  });
+
+  return updated;
+}
+
+/* --------------------------------------- */
+export const updateUserCostsRequest = () => {
+  return {
+    type: types.UPDATE_USER_COSTS_REQUEST,
+  }
+}
+
+/* --------------------------------------- */
+const updateUserCostsSuccess = (updated) => {
+  return {
+    type: types.UPDATE_USER_COSTS_SUCCESS,
+    payload: {
+      updated,
+    }
+  }
+}
+
+/* --------------------------------------- */
+const updateUserCostsFailure = (error) => {
+  return {
+    type: types.UPDATE_USER_COSTS_FAILURE,
+    payload: {
+      error,
+    }
+  }
+}
+
+/* --------------------------------------- */
+export const updateUserCosts = (values) => async (dispatch) => {
+  const updated = prepareCostsToUpdate(values);
+  dispatch(updateUserCostsRequest());
+
+  try {
+    await sleep(500);
+    const response = { code: 200 };
+    dispatch(updateUserCostsSuccess(updated));
+  } catch(e) {
+    console.log(e.message)
+    dispatch(updateUserCostsFailure(e));
+  }
+};
