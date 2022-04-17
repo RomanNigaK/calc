@@ -263,7 +263,7 @@ export const closeHelp = () => {
     }
 };
 
-export const setStateProducts = (data, myPrice="[{\"total\":0,\"products\":[]}]") => {
+export const setStateProducts = (data, myPrice="{\"total\":0,\"products\":[]}") => {
 
     return {
         type: SETSTATEPRODUCTS,

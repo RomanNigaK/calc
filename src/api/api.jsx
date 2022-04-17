@@ -1,10 +1,10 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-   //baseURL: "http://localhost:3000/",
-    baseURL:"https://fortestreactnode-js.ru/",
+  //baseURL: "http://localhost:3000/",
+   baseURL:"https://fortestreactnode-js.ru/",
     withCredentials: true,
-    credentials: 'include'
+   // credentials: 'include'
 
 });
 
@@ -23,7 +23,7 @@ export const productsAPI = {
     updateProductItem(obj) {
         return instance.put(`products`,{obj}).then(
             response => {
-
+        //console.log(response)
                 if (response.data.update) {
                     console.log("Запись обновлена");
                 } else {
