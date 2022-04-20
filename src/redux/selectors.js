@@ -17,6 +17,7 @@ export let getUserData=(state)=>{
     return (state.auth.user)
 };
 
-export let getPosts=(state)=>{
+export let getPosts = (state) => {
+    console.log("home state", state)
     return state.home.posts;
-}
+};

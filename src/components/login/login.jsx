@@ -3,8 +3,6 @@ import {Field, handleSubmit, reduxForm} from "redux-form";
 import {useNavigate} from "react-router";
 
 
-
-
 const Login = (props) => {
     //const shouldRedirect = true;
 
@@ -20,7 +18,6 @@ const Login = (props) => {
 
         <>
             <form onSubmit={props.handleSubmit}>
-
                 <div>
                    <Field component="input" name="email" placeholder={"Login"}/>
                 </div>

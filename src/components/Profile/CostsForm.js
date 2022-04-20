@@ -3,6 +3,7 @@ import { Form, Field } from "react-final-form";
 import { useDispatch } from "react-redux";
 import styles from "./Profile.module.css";
 import { updateUserCosts } from "../../redux/actions";
+import * as axios from "axios";
 
 /* --------------------------------------------------------------------------- */
 function CostItem({ item }) {
@@ -21,8 +22,22 @@ function CostItem({ item }) {
   )
 }
 
-const onSubmit = (dispatch) => (values) => {
-  dispatch(updateUserCosts(values));
+const onSubmit = async (values, form) => {
+  const formState = form.getState();
+  const dirtyFields = formState.dirtyFields;
+  const products = Object.keys(dirtyFields).map((key) => {
+    return {
+      id: parseInt(key.split("_")[1]),
+      price: parseInt(values[key]),
+    };
+  });
+  const reqBody = {
+    total: products.length,
+    products,
+  };
+
+  const res = await axios.put("https://fortestreactnode-js.ru/products/", reqBody);
+  console.log(res);
 }
 
 const isModify = (form) => {
@@ -33,7 +48,7 @@ const isModify = (form) => {
 const CostsForm = ({ products }) => {
   const dispatch = useDispatch();
   return <Form
-    onSubmit={onSubmit(dispatch)}
+    onSubmit={onSubmit}
     render={ ({ handleSubmit, form, submitting, pristine, values }) => (
       <form onSubmit={ handleSubmit }>
 
@@ -43,7 +58,6 @@ const CostsForm = ({ products }) => {
               products.map((item) => <CostItem item={item} />)
             }
           </ul>
-          { console.log(form.getState()) }
           {
             form.getState().dirty
               ? <>
@@ -52,10 +66,6 @@ const CostsForm = ({ products }) => {
               </>
               : null
           }
-<<<<<<< HEAD
-=======
-          { console.log(submitting) }
->>>>>>> Update CostsForm.js
         </div>
       </form>
     )}

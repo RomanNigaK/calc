@@ -1,10 +1,6 @@
 import {productsAPI} from "../api/api";
-<<<<<<< HEAD
 import {lodash as _} from "lodash";
-=======
-import { lodash as _ } from "lodash";
 import * as types from "./types";
->>>>>>> Update ProfileMyCosts, actions, product-reduce
 
 const SETMUITEMPRODUCT = "SETMUITEMPRODUCT";
 const SETCOLTITEMMYPRODUCT = "SETCOLTITEMMYPRODUCT";

@@ -20,15 +20,18 @@ export const productsAPI = {
         )
     },
     updateProductItem(user,obj) {
-        return instance.put(`products`,{user:user,myPrice:JSON.stringify(obj)}).then(
-            response => {
-
-                if (response.data.update) {
-                    console.log("Запись обновлена");
-                } else {
-                    console.warn("Запись не обновлена")
-                }
+        return instance.put(`products`,
+          {
+            user: user,
+            myPrice: JSON.stringify(obj)
+          })
+          .then(response => {
+            if (response.data.update) {
+              console.log("Запись обновлена");
+            } else {
+              console.warn("Запись не обновлена")
             }
+          }
         )
     },
  /*    updateProductItem(colt, id) {

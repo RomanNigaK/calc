@@ -40,7 +40,7 @@ class App extends React.Component {
             <>
               <Routes>
                 <Route path="/" element={<Layout/>}>
-                  <Route index element={<HomePage/>}/>
+                  <Route index element={<HomePageContainer/>}/>
                   <Route path="calc" element={<CalcContainer/>}/>
                   <Route path="login" element={<LoginPageContainer/>}/>
                   <Route path="profile" element={<MyProfileContainer/>}>

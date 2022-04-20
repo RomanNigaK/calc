@@ -10,7 +10,7 @@ import { productsAPI } from "../api/api";
 import sleep from "../utils/sleep";
 
 
-
+/* ======= UPDATE COSTS ===================================================== */
 const updateCostSuccess = () => ({
   type: UPDATE_COST_SUCCESS,
 });
@@ -38,7 +38,7 @@ const updateCost = ({ id, value }) => async (dispatch) => {
   }
 };
 
-/*  =============== */
+/*  ============================== ============================== ===============   */
 export const doProductsIsLoaded = () => {
   return {
     type: PRODUCTS_HAS_BEEN_LOADED,

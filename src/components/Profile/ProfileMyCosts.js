@@ -37,7 +37,6 @@ export default function ProfileMyCosts() {
   const products = useSelector((state) => state.productsreduce.products);
   const [ currFilter, setFilter ] = useState("all");
   const filtered = filters[currFilter](products);
-  console.log(products);
 
   const choiceFilter = (e) => {
     setFilter(
