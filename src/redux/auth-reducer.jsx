@@ -11,7 +11,7 @@ const LOGINERROR = "LOGINERROR";
 let initialStore = {
     isAuth: false,
     user: [
-        {name: null, email: null}
+        {name: null, email: null,mylike:"{\"like\": []}"}
     ],
     isForm: 0, //0 - форма входа / 1 - форма регистрации
     isRegistration: [{
@@ -52,9 +52,10 @@ const authReducer = (state = initialStore, action) => {
         }
         case SETDATAUSER: {
 
+
             return {
                 ...state,
-                user: [],
+                user: [{name: null, email: null,mylike:"{\"like\": []}"}],
                 isAuth: false
 
             }
@@ -122,6 +123,7 @@ export const authMe = () => async dispatch => {
     if (response.resultCode === 0) {
           //  console.log(response[0].myPrice)
         dispatch(setUserState(response.user));
+        console.log(response)
         return response
     }
     return response
@@ -136,6 +138,7 @@ export const setEnterDataForm = (idForm) => {
 }
 
 const setDataUser = () => {
+    
     return {
         type: SETDATAUSER
 

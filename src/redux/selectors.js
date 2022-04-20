@@ -17,6 +17,10 @@ export let  getUserData=(state)=>{
     return (state.auth.user)
 };
 
-export let getPosts=(state)=>{
+export let getPostsState=(state)=>{
     return state.home.posts;
+}
+
+export let getMyLikePosts=(state)=>{
+    return JSON.parse(state.auth.user[0].mylike);
 }

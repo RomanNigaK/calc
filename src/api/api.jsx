@@ -32,19 +32,7 @@ export const productsAPI = {
             }
         )
     },
- /*    updateProductItem(colt, id) {
-        return instance.put(`products`, {price: colt, id: id}).then(
-            response => {
-
-                if (response.data.update) {
-                    console.log("Запись обновлена");
-                } else {
-                    console.warn("Запись не обновлена")
-                }
-            }
-        )
-    },
- */   newitemProduct(values) {
+   newitemProduct(values) {
 
         return instance.post(`products/newproduct`, values).then(
             response => {
@@ -76,4 +64,10 @@ export const authAPI = {
         )
     }
 };
-
+export const postsApi={
+    getPosts(){
+        return instance.get("posts").then(
+            response=>response.data
+            )
+    }
+}

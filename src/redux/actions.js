@@ -31,7 +31,7 @@ const updateCost = ({ id, value }) => async (dispatch) => {
     ///const response = await productsAPI.updateProductItem(value, id);
     const response = await productsAPI.updateProductItem({
       "total": 2,
-        "products": [{"id": 2, "price": 253}, {"id": 3, "price": 400}]
+        "products": [{"id": 2, "price": 100}, {"id": 3, "price": 400}]
 
     });
    // const response = await productsAPI.updateProductItem(1,[{total:2,products:[{id: 2, price: 200}, {id: 3, price: 400}]}]);

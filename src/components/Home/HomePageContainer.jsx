@@ -1,11 +1,13 @@
 import {connect} from "react-redux";
 import HomePage from "./Homepage";
-import {getPosts} from "../../redux/selectors";
+import {getPostsState,getIsAuth,getMyLikePosts} from "../../redux/selectors";
 
 let mapStateToProps=(state)=>{
 
     return{
-       posts:getPosts(state)
+       posts:getPostsState(state),
+       isAuth:getIsAuth(state),
+       myLike:getMyLikePosts(state)
     }
 
 };

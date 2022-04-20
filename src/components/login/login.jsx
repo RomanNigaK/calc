@@ -6,15 +6,28 @@ import {useNavigate} from "react-router";
 
 
 const Login = (props) => {
-    //const shouldRedirect = true;
+
+
 
     const navigate = useNavigate();
 
     React.useEffect(() => {
+        
         if (props.isAuth) {
-            navigate('/profile');
+           
+        navigate(-1)
+    //navigate("/profile")
+
         }
     });
+
+
+ 
+   
+   
+
+
+
     return (
 
 

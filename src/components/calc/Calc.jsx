@@ -95,9 +95,10 @@ const Calc = (props) => {
                     </div>
 
                 } else {
-                    return <div className={css.rowitemproduct}>
-                        <span onClick={addInMyListProducts} id={obj.id}>{obj.name} </span>
-                        <span className={css.edizmproduct}>({obj.volume}{obj.edizm})</span>
+                    return 
+                    <div className  = {css.rowitemproduct}>
+                        <span onClick   = {addInMyListProducts} id={obj.id}>{obj.name} </span>
+                        <span className = {css.edizmproduct}>({obj.volume}{obj.edizm})</span>
                     </div>
                 }
             }
@@ -132,18 +133,20 @@ const Calc = (props) => {
     }
 
     return (
+
         <div className={css.content}>
             <div className={css.listproducts} style={{backgroundImage: "url(/assetc/strelkafon.png)"}}>
-                <Find search={props.products.findItems}
-                      addInMyListProducts={addInMyListProducts}
-                      value={props.products.strSearch}
-                      setSearch={props.setSearch}
-                      setNullFind={props.setNullFind}
-                      chekProductItem={chekProductItem}
-                      showSearch={props.products.showSearch}
-                      products={props.products}
-                      showHelp={props.showHelp}
-                      closeHelp={props.closeHelp}/>
+                <Find 
+                search              = {props.products.findItems}
+                addInMyListProducts = {addInMyListProducts}
+                value               = {props.products.strSearch}
+                setSearch           = {props.setSearch}
+                setNullFind         = {props.setNullFind}
+                chekProductItem     = {chekProductItem}
+                showSearch          = {props.products.showSearch}
+                products            = {props.products}
+                showHelp            = {props.showHelp}
+                closeHelp           = {props.closeHelp}/>
 
                    <div className={css.textHelp}>{props.products.currentHelp}</div>
 

@@ -27,5 +27,13 @@
 }
 .like img{
     width: 30px;
-    padding-left: 30px;
+    padding-left: 5px;
+    cursor: pointer;
+
+}
+.countLike{
+    color: red;
+    font-size: 20pt;
+    margin-left: 10px;
+
 }
