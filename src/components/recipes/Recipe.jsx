@@ -6,7 +6,7 @@ const {id}=useParams();
     useEffect(() => {
         props.setActivRecipe({id});
     });
-    let r = props.viewRecipe.split("<br>").map(item=><div>{item}</div>)
+    let r = props.viewRecipe.split("<br>").map(item=><div key={item.id}>{item}</div>)
     return(
         <div>Рецепт под номером {id}
             {r}

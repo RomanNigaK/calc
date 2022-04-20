@@ -12,11 +12,11 @@ import FirstRecipe from "./components/recipes/FirstRecipe";
 import RecipeContainer from "./components/recipes/RecipeContainer";
 import LoginPageContainer from "./components/login/LoginPageContainer";
 import MyProfileContainer from "./components/Profile/MyProfileContainer";
+
 import ProfileCredentials from "./components/Profile/ProfileCredentials";
 import ProfileMyCosts from "./components/Profile/ProfileMyCosts";
 import {authAPI} from "./api/api";
 import {connect} from "react-redux";
-import {authMe} from "./redux/auth-reducer";
 import {initializedApp} from "./redux/app-reducer";
 import PreloaderApp from "./common/preloader/PreloaderApp";
 import HomePageContainer from "./components/Home/HomePageContainer";
@@ -71,6 +71,7 @@ let mapStateToProps=(state)=>{
         initialized:state.app.initialized
     }
 }
+
 
 const AppContainer = connect(mapStateToProps,{initializedApp})(App);
 export default AppContainer;

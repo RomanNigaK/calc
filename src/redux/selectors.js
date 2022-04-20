@@ -13,11 +13,14 @@ export let  getLoginError=(state)=>{
 export let  getIsAuth=(state)=>{
     return (state.auth.isAuth)
 };
-export let getUserData=(state)=>{
+export let  getUserData=(state)=>{
     return (state.auth.user)
 };
 
-export let getPosts = (state) => {
-    console.log("home state", state)
+export let getPostsState=(state)=>{
     return state.home.posts;
-};
+}
+
+export let getMyLikePosts=(state)=>{
+    return JSON.parse(state.auth.user[0].mylike);
+}

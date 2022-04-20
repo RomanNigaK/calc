@@ -1,27 +1,52 @@
 import React from "react";
-import style from "./Homepage.module.css"
-import like from "./../../svg/like.svg"
-import { useSelector } from "react-redux";
+import style from "./Homepage.module.css";
+import like from "./../../svg/like.svg";
 
-const HomePage = ({ posts }) => {
+import likeBlack from "./../../svg/likeBlack.svg"
 
-    const listPost = posts.map(post =>
-        <div className={style.post}>
-          <img src={post.img} alt={post.post}/>
-          <div className={style.likeText}>
-            <div className={style.text}>{post.post}</div>
-            <div className={style.like}>
-              <img src={like} alt=""/>
-            </div>
-          </div>
-        </div>
-    );
+const HomePage = ({posts,isAuth,myLike, ...props}) => {
+
+
+   let clickLike=()=>{
+
+        alert("Вы нажали Like");
+    };
+
+    let itNoAuth = ()=>{
+        alert("Для лайка нужно авторизоваться");
+    }
+
+
+    let listPost = posts.map(p => (<div  key={p.id+"cont"} className={style.post}>
+                <img src={p.imgPost} alt={p.textPost}/>
+                <div key={p.id+"data"} className={style.likeText}>
+                    <div key={p.id+"post"} className={style.text}>
+
+                        {p.textPost}
+                    </div>
+                    <div key={p.id+"likeCount"} className={style.countLike}>{p.countLike}</div>
+                    <div key={p.id+"like"} className={style.like}>
+
+
+                        {!isAuth?
+                            <img onClick={itNoAuth} src={likeBlack} alt=""/>:
+
+                            <img onClick={clickLike} src={myLike.like.includes(p.id)?like:likeBlack} alt=""/>
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>))
 
     return (
         <div className={style.content}>
-          { listPost }
+
+            {listPost}
         </div>
 
     )
 };
+
 export default HomePage;

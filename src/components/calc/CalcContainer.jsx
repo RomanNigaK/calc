@@ -23,7 +23,7 @@ let mapStateToProps=(state)=>{
 
 
 const CalcContainer = connect(mapStateToProps,
-    {setStateProducts,setSearch,setNullFind,
+    {setSearch,setNullFind,
         stateCalculation,removeItemMyProduct,setWeightCake,
         setItemMyProduct,setColtItemMyProduct,setCountItemMyProduct,
         getProducts,showHelp,closeHelp})(Calc);
