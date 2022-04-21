@@ -1,9 +1,11 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
 import { useDispatch } from "react-redux";
+import { productsAPI } from "../../api/api";
 import styles from "./Profile.module.css";
-import { updateUserCosts } from "../../redux/actions";
 import * as axios from "axios";
+import { initializedApp } from "../../redux/app-reducer.jsx";
+
 
 /* --------------------------------------------------------------------------- */
 function CostItem({ item }) {
@@ -15,14 +17,13 @@ function CostItem({ item }) {
         className={styles.item__input}
         name={ `product_${item.id}` }
         component="input"
-        initialValue={item.colt}
-        type="text"
+        type="number"
       />
     </li>
   )
 }
 
-const onSubmit = async (values, form) => {
+const onSubmit = (dispatch, products) => async (values, form) => {
   const formState = form.getState();
   const dirtyFields = formState.dirtyFields;
   const products = Object.keys(dirtyFields).map((key) => {
@@ -36,8 +37,12 @@ const onSubmit = async (values, form) => {
     products,
   };
 
-  const res = await axios.put("https://fortestreactnode-js.ru/products/", reqBody);
-  console.log(res);
+  try {
+    const res = await productsAPI.updateProductItem(reqBody)
+    await dispatch(initializedApp());
+  } catch(err) {
+    console.log(err);
+  }
 }
 
 const isModify = (form) => {
@@ -46,9 +51,16 @@ const isModify = (form) => {
 
 /* --------------------------------------------------------------------------- */
 const CostsForm = ({ products }) => {
+
   const dispatch = useDispatch();
+  const initialValues = {}
+  products.forEach((item) => {
+    initialValues[`product_${item.id}`] = item.colt;
+  });
+
   return <Form
-    onSubmit={onSubmit}
+    onSubmit={onSubmit(dispatch, products)}
+    initialValues={ initialValues }
     render={ ({ handleSubmit, form, submitting, pristine, values }) => (
       <form onSubmit={ handleSubmit }>
 
@@ -61,9 +73,16 @@ const CostsForm = ({ products }) => {
           {
             form.getState().dirty
               ? <>
-                <button type="submit">Сохранить</button>
-                <button onClick={() => form.restart()} type="reset">Сбросить</button>
+                <button type="submit" disabled={submitting || pristine}>Сохранить</button>
+                <button onClick={() => form.restart()} type="reset" disabled={submitting || pristine}>Сбросить</button>
               </>
+              : null
+          }
+        </div>
+        <div>
+          {
+            form.getState().submitting
+              ? <strong>Отправляем...</strong>
               : null
           }
         </div>

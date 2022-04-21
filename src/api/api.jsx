@@ -21,16 +21,7 @@ export const productsAPI = {
         )
     },
     updateProductItem(obj) {
-        return instance.put(`products`,{obj}).then(
-            response => {
-        //console.log(response)
-                if (response.data.update) {
-                    console.log("Запись обновлена");
-                } else {
-                    console.warn("Запись не обновлена")
-                }
-            }
-        )
+        return instance.put(`products`, obj)
     },
    newitemProduct(values) {
 
