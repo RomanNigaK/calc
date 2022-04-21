@@ -5,11 +5,12 @@ import like from "./../../svg/like.svg";
 import likeBlack from "./../../svg/likeBlack.svg"
 
 const HomePage = ({posts,isAuth,myLike, ...props}) => {
+   
  
 
-   let clickLike=()=>{
-
-        alert("Вы нажали Like");
+   let clickLike=(obj)=>{
+        console.log(obj);
+        props.setLikeList(obj);
     };
 
     let itNoAuth = ()=>{
@@ -31,7 +32,11 @@ const HomePage = ({posts,isAuth,myLike, ...props}) => {
                         {!isAuth?
                             <img onClick={itNoAuth} src={likeBlack} alt=""/>:
                              
-                            <img onClick={clickLike} src={myLike.like.includes(p.id)?like:likeBlack} alt=""/>
+                            <img onClick={()=>
+                                clickLike(!myLike.like.includes(p.id)?
+                                    {action : "like",idPost:p.id}:
+                                    {action : "disLike",idPost:p.id}
+                                    )} src={myLike.like.includes(p.id)?like:likeBlack} alt=""/>
 
                         }
                         
