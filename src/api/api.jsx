@@ -1,8 +1,8 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-  //baseURL: "http://localhost:3000/",
-   baseURL:"https://fortestreactnode-js.ru/",
+  // baseURL: "http://localhost:3000/",
+  baseURL:"https://fortestreactnode-js.ru/",
     withCredentials: true,
    // credentials: 'include'
 
@@ -21,7 +21,16 @@ export const productsAPI = {
         )
     },
     updateProductItem(obj) {
-        return instance.put(`products`, obj)
+        return instance.put(`products`,obj).then(
+            response => {
+        //console.log(response)
+                if (response.data.update) {
+                    console.log("Запись обновлена");
+                } else {
+                    console.warn("Запись не обновлена")
+                }
+            }
+        )
     },
    newitemProduct(values) {
 
@@ -53,12 +62,24 @@ export const authAPI = {
         return instance.get("users/exit").then(
             response => response,
         )
+    },
+    updateMyLike(obj){
+        return instance.put("users/mylike",{...obj}).then(
+            response=>response.data
+            )
     }
 };
+
 export const postsApi={
     getPosts(){
         return instance.get("posts").then(
             response=>response.data
             )
+    },
+    updateLikeList(listLike){
+        return instance.put("posts/like",listLike).then(
+            response=>response.data
+            )
     }
+
 }
