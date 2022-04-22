@@ -1,5 +1,7 @@
 import {postsApi} from "../api/api";
 const SETPOSTS = "SETPOSTS";
+const CLICKLIKE = "CLICKLIKE";
+export const SETCOUNTLIKE = "SETCOUNTLIKE";
 
 
 let initialStore = {
@@ -16,12 +18,26 @@ let initialStore = {
 };
 
 const homeReducer = (state = initialStore, action) => {
+   
    switch (action.type) {
         case SETPOSTS: {
 
             return {
                 ...state,
                 posts: action.posts
+            }
+        }
+        case SETCOUNTLIKE:{
+            
+            return{
+                ...state,
+                posts:state.posts.map(p=>{
+                    if(p.id===action.id){
+
+                        return  {...p, countLike: action.count}
+                    }
+                    return p
+                })
             }
         }
 
@@ -40,6 +56,12 @@ const setStatePosts=(posts)=>{
     }
 }
 
+
+
+
+
+
+
 export const getPosts = () => {
 
 
@@ -55,4 +77,8 @@ export const getPosts = () => {
     }
 };
 
+
+
+
 export default homeReducer;
+

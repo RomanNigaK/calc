@@ -1,5 +1,7 @@
-import {authAPI} from "../api/api";
+import {authAPI,postsApi} from "../api/api";
 import recipesReducer from "./recipes-reducer";
+
+import {SETCOUNTLIKE} from "./home-reducer"
 
 const SETUSER = "SETUSER";
 const SETENTERDATAFORM = "SETENTERDATAFORM";
@@ -7,12 +9,17 @@ const SETDATAUSER = "SETDATAUSER";
 const SETSACCESSFULREG = "SETSACCESSFULREG";
 const SETSEX = "SETSEX";
 const LOGINERROR = "LOGINERROR";
+const TOGGLELIKE = "TOGGLELIKE";
+const SETUSERLIKEPOST = "SETUSERLIKEPOST";
+
+
 
 let initialStore = {
     isAuth: false,
     user: [
         {name: null, email: null,mylike:"{\"like\": []}"}
     ],
+    myListLike:"",
     isForm: 0, //0 - форма входа / 1 - форма регистрации
     isRegistration: [{
         status: false,
@@ -77,6 +84,33 @@ const authReducer = (state = initialStore, action) => {
             }
 
         }
+        case SETUSERLIKEPOST:{
+
+            return  {
+                ...state,
+                myListLike: action.json
+
+            }
+
+        }
+        case TOGGLELIKE:{
+            console.log(JSON.parse(state.user[0].mylike));
+            let idsLike = JSON.parse(state.user[0].mylike);
+            action.obj.action==="like"?
+                 idsLike.like.push(action.obj.idPost):
+                 idsLike.like.splice(idsLike.like.indexOf(action.obj.idPost), 1)
+                
+            
+
+            console.log(idsLike)
+            return{
+                ...state,
+                 user:state.user.map((user) => { 
+                     return {...user, mylike: JSON.stringify(idsLike)}
+                })
+             }
+        }
+
         default: {
             if (state.isRegistration.error == false) {
                 return {
@@ -124,10 +158,18 @@ export const authMe = () => async dispatch => {
     if (response.resultCode === 0) {
           //  console.log(response[0].myPrice)
         dispatch(setUserState(response.user));
+        dispatch(setUserLikePosts(response.user[0].mylike));
         console.log(response)
         return response
     }
     return response
+}
+
+export const setUserLikePosts=(json)=>{
+    return{
+        type:SETUSERLIKEPOST,
+        json:json
+    }
 }
 
 
@@ -188,6 +230,39 @@ export const exitApp = () => {
         })
     }
 
+}
+
+
+export const setLikeList=(obj)=>{
+    //console.log(obj);
+    return async (dispatch)=>{
+
+        let updateLike = await postsApi.updateLikeList(obj);
+           // console.log(updateLike);
+        let updateMyLike = await authAPI.updateMyLike(obj);  
+        console.log(updateMyLike); 
+
+
+        Promise.all([updateLike]);
+        dispatch(toggleLike(obj));
+        dispatch(setNewCountLike(updateLike));
+    }
+}
+
+export const setNewCountLike=(response)=>{
+      
+    return{
+        type:SETCOUNTLIKE,
+        id:response.idPost,
+        count:response.newLike
+    }
+}
+
+export const toggleLike=(obj)=>{
+    return{
+        type:TOGGLELIKE,
+        obj:obj
+    }
 }
 
 export default authReducer;

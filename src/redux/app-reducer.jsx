@@ -37,8 +37,6 @@ export const initializedApp = () => async (dispatch) => {
     }
 
     let promiseProducts = await dispatch(getProducts(obj));
-
-
     let promisePosts = await dispatch(getPosts());
   
 
