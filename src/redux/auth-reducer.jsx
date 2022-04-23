@@ -142,7 +142,7 @@ export const setUser = (values) => {
     return async (dispatch) => {
         let data = await authAPI.login(values);
         if (data.resultCode == 1) {
-            dispatch(loginError("Не верная пара логи пароль"));
+            dispatch(loginError("Не верная пара логин/пароль"));
         } else {
             console.log(data);
             dispatch(setUserState(data.user));
@@ -150,6 +150,7 @@ export const setUser = (values) => {
         }
     }
 }
+
 export const authMe = () => async dispatch => {
 
     let response = await authAPI.isAuthUser();

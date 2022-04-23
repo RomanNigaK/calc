@@ -24,28 +24,28 @@ const LoginPage = (props) => {
         <>
             <h4>Для пользования некоторыми разделами сайта вам необходимо зарегистрироваться или авторизоваться</h4>
             <div className={css.content}>
-                <div id="0" onClick={clickForm}
-
-                     className={props.isForm == 0 ?
-                         css.loginuser + " " + css.activBorder :
-                         css.loginuser + " " + css.deactivBorder}>
+                <div
+                  id="0"
+                  onClick={clickForm}
+                  className={props.isForm == 0
+                    ? css.loginuser + " " + css.activBorder
+                    : css.loginuser + " " + css.deactivBorder}>
                     Enter
                 </div>
                 <div id="1" onClick={clickForm}
                      className={props.isForm == 1 ? css.registrationuser + " " + css.activBorder : css.registrationuser + " " + css.deactivBorder}>Registration
                 </div>
                 <div className={css.dataloginreg}>
-
-                    {props.isForm == 0 ? <LoginForm onSubmit={login}
-                                                    errorLogin={props.loginError}
-                                                    isAuth={props.isAuth}/> :
-                                            <RegistrationForm
-                                                    onSubmit={registartion}
-                                                    successfulRegistration={props.successfulRegistration}
-                                                    sex={props.sex}
-                                                    setSex={props.setSex}/>}
-
-
+                    {props.isForm == 0
+                      ? <LoginForm
+                          onSubmit={login}
+                          errorLogin={props.loginError}
+                          isAuth={props.isAuth}/> 
+                      : <RegistrationForm
+                          onSubmit={registartion}
+                          successfulRegistration={props.successfulRegistration}
+                          sex={props.sex}
+                          setSex={props.setSex}/>}
                 </div>
             </div>
         </>)

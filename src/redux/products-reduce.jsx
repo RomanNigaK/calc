@@ -1,5 +1,6 @@
 import {productsAPI} from "../api/api";
 import {lodash as _} from "lodash";
+import * as types from "./types";
 
 const SETMUITEMPRODUCT = "SETMUITEMPRODUCT";
 const SETCOLTITEMMYPRODUCT = "SETCOLTITEMMYPRODUCT";
@@ -43,6 +44,17 @@ let initialStore = {
 const productsReduce = (state = initialStore, action) => {
 
     switch (action.type) {
+        /* update user costs via reducer */
+        case types.UPDATE_USER_COSTS_SUCCESS:
+          console.log(types.UPDATE_USER_COSTS_SUCCESS)
+          const products = state.products
+          action.payload.updated.forEach((item) => {
+            products.find((i) => i.id === item.id).colt = item.price
+          });
+          return {
+            ...state,
+            products: [...products]
+          };
 
         case SETMUITEMPRODUCT: {
 
@@ -170,26 +182,6 @@ const productsReduce = (state = initialStore, action) => {
                 currentHelp: ""
             }
         }
-        /* sokolero */
-        case SWITCH_EDITABLE_COSTS:
-            return {
-                ...state,
-                costsEditable: !state.costsEditable,
-            }
-
-        case SAVE_CHANGED_COSTS:
-            const changedProducts = action.payload.costs;
-            return {
-                ...state,
-                products: state.products.map((item, index) => {
-                    return {
-                        ...item,
-                        name: changedProducts[index].name,
-                        colt: changedProducts[index].cost,
-                    }
-                })
-            }
-
         default:
             return state;
 

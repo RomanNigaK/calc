@@ -9,27 +9,19 @@ const Layout = ()=>{
 
     return(
         <div className={css.container}>
-            <div className={css.header}>
-                <HeaderContainer/>
+          <div className={css.header}>
+            <HeaderContainer/>
+          </div>
+          <nav className={css.nav}>
+            <NavLink className={({isActive}) =>isActive ? css.link: css.notactivelink} to="/">Главная</NavLink>
+            <NavLink className={({isActive}) =>isActive ? css.link : css.notactivelink} to="/Calc">Калькулятор</NavLink>
+            <NavLink className={({isActive}) =>isActive ? css.link: css.notactivelink} to="/recipes">Рецепты</NavLink>
+            <NavLink className={({isActive}) =>isActive ? css.link : css.notactivelink} to="/costs">База цен</NavLink>
 
-
-            </div>
-            <div className={css.linkhome}>
-                <NavLink className={({isActive}) =>isActive ? css.linkcalc : css.notactivelink} to="/">ГЛАВНАЯ</NavLink>
-            </div>
-            <div className={css.linkcalc}>
-                <NavLink  className={({isActive}) =>isActive ? css.linkcalc : css.notactivelink} to="/Calc">КАЛЬКУЛЯТОР</NavLink>
-            </div>
-            <div className={css.linkrecipes}>
-                <NavLink   className={({isActive}) =>isActive ? css.linkcalc : css.notactivelink} to="/recipes">РЕЦЕПТЫ</NavLink>
-            </div>
-            <div className={css.costs}>
-                <NavLink   className={({isActive}) =>isActive ? css.linkcalc : css.notactivelink} to="/costs">База цен</NavLink>
-            </div>
-            <div className={css.content}>
-                <Outlet/>
-            </div>
-
+          </nav>
+          <div className={css.content}>
+            <Outlet/>
+          </div>
         </div>
     )
 };

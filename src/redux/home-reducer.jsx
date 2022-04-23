@@ -44,11 +44,11 @@ const homeReducer = (state = initialStore, action) => {
         default:
             return state;
     }
-   
+
 };
 
 const setStatePosts=(posts)=>{
-   
+
 
     return{
          type: SETPOSTS,
@@ -66,11 +66,11 @@ export const getPosts = () => {
 
 
     return (dispatch) => {
-      
+
         return postsApi.getPosts().then(data => {
             console.log(data)
             dispatch(setStatePosts(data));
-           
+
         });
 
 
@@ -80,5 +80,5 @@ export const getPosts = () => {
 
 
 
-
 export default homeReducer;
+
