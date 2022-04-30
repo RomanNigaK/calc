@@ -154,7 +154,7 @@ export const setUser = (values) => {
 export const authMe = () => async dispatch => {
 
     let response = await authAPI.isAuthUser();
-
+console.log("fd")
     if (response.resultCode === 0) {
           //  console.log(response[0].myPrice)
         dispatch(setUserState(response.user));

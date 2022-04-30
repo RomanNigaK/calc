@@ -20,6 +20,7 @@ import {connect} from "react-redux";
 import {initializedApp} from "./redux/app-reducer";
 import PreloaderApp from "./common/preloader/PreloaderApp";
 import HomePageContainer from "./components/Home/HomePageContainer";
+import ContForTest from "./components/forTest/ForTest.jsx"
 
 class App extends React.Component {
 
@@ -42,6 +43,7 @@ class App extends React.Component {
                 <Route path="/" element={<Layout/>}>
                   <Route index element={<HomePageContainer/>}/>
                   <Route path="calc" element={<CalcContainer/>}/>
+                  <Route path="fortest" element={<ContForTest/>}/>
                   <Route path="login" element={<LoginPageContainer/>}/>
                   <Route path="profile" element={<MyProfileContainer/>}>
                     <Route index element={<ProfileCredentials />}/>

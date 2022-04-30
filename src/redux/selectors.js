@@ -1,3 +1,5 @@
+import {postsApi} from './../api/api'
+
 export let  getFormLogin=(state)=>{
     return (state.auth.isForm)
 };
@@ -17,8 +19,9 @@ export let  getUserData=(state)=>{
     return (state.auth.user)
 };
 
-export let getPostsState=(state)=>{
-    return state.home.posts;
+export let getPostsState= (state)=>{
+  
+    return state.home.posts
 }
 
 export let getMyLikePosts=(state)=>{

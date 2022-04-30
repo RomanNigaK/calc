@@ -17,6 +17,7 @@ const Layout = ()=>{
             <NavLink className={({isActive}) =>isActive ? css.link : css.notactivelink} to="/Calc">Калькулятор</NavLink>
             <NavLink className={({isActive}) =>isActive ? css.link: css.notactivelink} to="/recipes">Рецепты</NavLink>
             <NavLink className={({isActive}) =>isActive ? css.link : css.notactivelink} to="/costs">База цен</NavLink>
+            <NavLink className={({isActive}) =>isActive ? css.link : css.notactivelink} to="/fortest">Загрузка поста</NavLink>
 
           </nav>
           <div className={css.content}>

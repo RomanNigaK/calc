@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Homepage.module.css";
 import like from "./../../svg/like.svg";
+import host from './../../utils/host.js'
 
 import likeBlack from "./../../svg/likeBlack.svg"
 
@@ -18,7 +19,7 @@ const HomePage = ({posts,isAuth,myLike, ...props}) => {
 
 
     let listPost = posts.map(p => (<div  key={p.id+"cont"} className={style.post}>
-                <img src={p.imgPost} alt={p.textPost}/>
+                <img src={host+p.imgPost} alt={host+p.imgPost}/>
                 <div key={p.id+"data"} className={style.likeText}>
                     <div key={p.id+"post"} className={style.text}>
 

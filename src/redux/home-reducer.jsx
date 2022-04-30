@@ -2,6 +2,8 @@ import {postsApi} from "../api/api";
 const SETPOSTS = "SETPOSTS";
 const CLICKLIKE = "CLICKLIKE";
 export const SETCOUNTLIKE = "SETCOUNTLIKE";
+const SETPOSTNEW = "SETPOSTNEW";
+
 
 
 let initialStore = {
@@ -13,13 +15,13 @@ let initialStore = {
         {id:5,img:"/assetc/cake/5.jpg",post:"sdfsdfdsfsdfs sfsdf sdf sd fsd fsdfsdf",like:101},
         {id:6,img:"/assetc/cake/6.jpg",post:"sdfsdfdsfsdfs sfsdf sdf sd fsd fsdfsdf",like:10001},
         {id:7,img:"/assetc/cake/7.jpg",post:"sdfsdfdsfsdfs sfsdf sdf sd fsd fsdfsdf",like:100}
-    ]*/
-    posts:[]
-};
+        ]*/
+        posts:[]
+    };
 
-const homeReducer = (state = initialStore, action) => {
-   
-   switch (action.type) {
+    const homeReducer = (state = initialStore, action) => {
+
+     switch (action.type) {
         case SETPOSTS: {
 
             return {
@@ -27,8 +29,15 @@ const homeReducer = (state = initialStore, action) => {
                 posts: action.posts
             }
         }
+        case SETPOSTNEW: {
+            console.log(action.post)
+            return {
+                ...state,
+                posts: [action.post,...state.posts ]
+            }
+        }
         case SETCOUNTLIKE:{
-            
+
             return{
                 ...state,
                 posts:state.posts.map(p=>{
@@ -42,7 +51,7 @@ const homeReducer = (state = initialStore, action) => {
         }
 
         default:
-            return state;
+        return state;
     }
 
 };
@@ -51,9 +60,18 @@ const setStatePosts=(posts)=>{
 
 
     return{
-         type: SETPOSTS,
-         posts:posts
-    }
+       type: SETPOSTS,
+       posts:posts
+   }
+}
+
+export const setStateNewPost=(post)=>{
+
+
+    return{
+       type: SETPOSTNEW,
+       post:post
+   }
 }
 
 
