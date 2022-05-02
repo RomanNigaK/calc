@@ -41,7 +41,8 @@ class ForTest extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         };
-        axios.post("http://localhost:3000/posts/newpostimg",formData,config)
+        axios.post("https://calccake.ru/posts/newpostimg",formData,config)
+        //axios.post("http://localhost:3000/posts/newpostimg",formData,config)
         .then((response) => {
             //alert("The file is successfully uploaded");
             console.log(response);
