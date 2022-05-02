@@ -1,9 +1,9 @@
 import * as axios from "axios";
 
 const instance = axios.create({
-  //baseURL: "http://localhost:3000/",
+  baseURL: "http://localhost:3000/",
   // baseURL:"https://fortestreactnode-js.ru/",
-   baseURL:"https://calccake.ru/",
+  // baseURL:"https://calccake.ru/",
     withCredentials: true,
    // credentials: 'include'
 
@@ -87,7 +87,13 @@ export const postsApi={
         return instance.post("posts/newpost",{...post}).then(
             response=>response.data
             )
+    },
+    existImg(){
+        return instance.get("posts/img",).then(
+            response=>response.data
+            )
     }
+
     
 
 

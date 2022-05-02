@@ -24,16 +24,24 @@ class ForTest extends React.Component {
         this.textPost = this.textPost.bind(this);
         this.onFormSubmit2 = this.onFormSubmit2.bind(this);
     }
+    componentDidMount(){
+        postsApi.existImg().then(response=>{
+            if(response===false){this.setState({img:null});}else{this.setState({img:response});}
+            
+        })
+    }
     onFormSubmit(e){
         e.preventDefault();
+        
         const formData = new FormData();
         formData.append('myImage',this.state.file);
         const config = {
+            withCredentials: true,
             headers: {
                 'content-type': 'multipart/form-data'
             }
         };
-        axios.post("https://calccake.ru/posts/newpostimg",formData,config)
+        axios.post("http://localhost:3000/posts/newpostimg",formData,config)
         .then((response) => {
             //alert("The file is successfully uploaded");
             console.log(response);
@@ -42,7 +50,7 @@ class ForTest extends React.Component {
         });
     }
     onFormSubmit2(e){
-
+ 
         e.preventDefault();
         const formData = new FormData();
         formData.append('img',this.state.img);
@@ -75,7 +83,7 @@ class ForTest extends React.Component {
 
             return(
                 <div>
-                <img style={{"width":'200px'}} src={host+'/posts/'+this.state.img} alt={this.state.img}/>
+                <img style={{"width":'200px'}} src={host+'/posts/tmp/'+this.state.img} alt={this.state.img}/>
                 <form onSubmit={this.onFormSubmit2}>
 
                 <h1>Описание поста</h1>
